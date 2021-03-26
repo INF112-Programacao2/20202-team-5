@@ -5,6 +5,9 @@ class Hand {
 private:
   vector<Card> cards;
 public:
-  void draw(Card card);
+  Hand();
+  void draw(int ammount);
   void play(Card card);
+  bool hasPlay();
+  void noPlay();
 };

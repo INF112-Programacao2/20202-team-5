@@ -4,7 +4,7 @@ private:
   int _score[4];
   int _active_player;
 public:
-  Game();
+  Game(_players);
   int get_players();
   void set_players(int players)
   int* get_score();
