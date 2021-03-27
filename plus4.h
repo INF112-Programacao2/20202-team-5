@@ -1,6 +1,6 @@
-#include "blackDrawCard.h"
+#include "blackCard.h"
 
-class Plus4 : public BlackDrawCard {
+class Plus4 : public BlackCard {
 public:
   Plus4();
 }
