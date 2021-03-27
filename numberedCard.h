@@ -7,4 +7,4 @@ public:
   ColoredCard(std::string color);
   int get_number();
   void set_number(int number);
-}
+};

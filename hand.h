@@ -3,7 +3,7 @@
 
 class Hand {
 private:
-  vector<Card> cards;
+  vector<Card> _cards;
 public:
   Hand();
   void draw(int ammount);

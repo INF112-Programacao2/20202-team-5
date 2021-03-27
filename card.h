@@ -4,5 +4,5 @@ class Card {
 public:
   void skip();
   void skip(int player);
-  bool playable();
+  bool isPlayable();
 };

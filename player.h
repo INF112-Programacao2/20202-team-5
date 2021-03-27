@@ -2,8 +2,11 @@
 
 class Player {
 private:
-  bool skipped;
-  Hand hand;
+  int _score;
+  bool _skipped;
+  Hand _hand;
 public:
   Player();
+  int get_score();
+  void set_score(int score);
 }

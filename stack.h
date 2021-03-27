@@ -3,8 +3,8 @@
 
 class Stack {
 private:
-  vector<Card> cards;
+  vector<Card> _cards;
 public:
   Stack();
-  get_topCard();
+  Card get_topCard();
 };

@@ -2,7 +2,8 @@
 
 class ColoredDrawCard : public ColoredCard {
 private:
-  int drawAmmount;
+  int _drawAmmount;
 public:
+  ColoredDrawCard();
   void forceDraw();
-}
+};
