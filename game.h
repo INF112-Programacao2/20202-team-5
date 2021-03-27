@@ -1,8 +1,10 @@
 #include "board.h"
+#include "player.h"
 
 class Game {
 private:
   int _players;
+  Player _playerList;
   int _active_player;
   Board _board;
 public:
