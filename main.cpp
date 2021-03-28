@@ -1,9 +1,12 @@
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_font.h>
-#include <stdbool.h>
+//#include <allegro5/allegro5.h>
+//#include <allegro5/allegro_font.h>
+//#include <stdbool.h>
+#include<iostream>
+#include "game.h"
 
 int main()
 {
+  /*
     al_init();
     al_install_keyboard();
 
@@ -43,6 +46,13 @@ int main()
     al_destroy_display(disp);
     al_destroy_timer(timer);
     al_destroy_event_queue(queue);
-
-    return 0;
+*/
+  Game game(2);
+  std::cout << game.get_players() << ' ' << game.get_active_player() << std::endl;
+  std::cout << game.get_playerList().size() << std::endl;
+  std::cout << game.get_board()->get_number() << " / " << game.get_board()->get_color() << std::endl;
+  for(int i=0; i <game.get_board()->get_deck()->get_cards().size();i++) {
+    std::cout << game.get_board()->get_deck()->get_cards().at(i)->get_color() << " / " << game.get_board()->get_deck()->get_cards().at(i)->get_number() << std::endl;
+  }
+  return 0;
 }

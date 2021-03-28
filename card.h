@@ -2,7 +2,7 @@
 
 class Card {
 public:
-  void skip();
-  void skip(int player);
-  bool isPlayable();
+  virtual std::string get_color()=0;
+  virtual int get_number()=0;
+  virtual bool isPlayable();
 };

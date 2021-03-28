@@ -1,12 +1,14 @@
 #include<vector>
-#include "Card.h"
+#include "numberedCard.h"
 
 class Deck {
 private:
-  vector<Card> _cards;
+  std::vector<Card*> _cards;
 public:
   Deck();
-  fillDeck();
-  get_topCard();
-  get_topCards(int ammount);
+  std::vector<Card*> get_cards();
+  void fillDeck();
+  Card* get_topCard();
+  Card* newNumberedCard(std::string color, int number);
+//  get_topCards(int ammount);
 };
