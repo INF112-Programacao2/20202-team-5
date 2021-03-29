@@ -31,3 +31,11 @@ Deck* Board::newDeck() {
   Deck* d = new Deck();
   return d;
 }
+
+int Board::get_orientation() {
+  return this->_orientation;
+}
+
+void Board::reverse_orientation() {
+  this->_orientation *= -1;
+}
