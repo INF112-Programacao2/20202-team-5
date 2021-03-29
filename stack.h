@@ -3,8 +3,9 @@
 
 class Stack {
 private:
-  vector<Card*> _cards;
+  std::vector<Card*> _cards;
 public:
   Stack();
+  std::vector<Card*> get_cards();
   Card* get_topCard();
 };
