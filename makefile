@@ -25,3 +25,6 @@ numberedCard.o: numberedCard.cpp numberedCard.h
 
 player.o: player.cpp player.h
 	g++ -c player.cpp
+
+clean:
+	rm *.o output
