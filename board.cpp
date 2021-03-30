@@ -5,7 +5,7 @@ Board::Board() {
   this->_color = "blue";
   this->_orientation = 0; //0 => clockwise, 1 => counter clockwise
   this->_deck = newDeck();
-  //Stack _stack;
+  this->_stack = newStack();
 }
 int Board::get_number() {
   return this->_number;
@@ -27,7 +27,24 @@ Deck* Board::get_deck() {
   return this->_deck;
 }
 
+Stack* Board::get_stack() {
+  return this->_stack;
+}
+
 Deck* Board::newDeck() {
   Deck* d = new Deck();
   return d;
+}
+
+Stack* Board::newStack() {
+  Stack* s = new Stack();
+  return s;
+}
+
+int Board::get_orientation() {
+  return this->_orientation;
+}
+
+void Board::reverse_orientation() {
+  this->_orientation *= -1;
 }
