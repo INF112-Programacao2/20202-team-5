@@ -54,6 +54,5 @@ int main()
   for(int i=0; i <game.get_board()->get_deck()->get_cards().size();i++) {
     std::cout << game.get_board()->get_deck()->get_cards().at(i)->get_color() << " / " << game.get_board()->get_deck()->get_cards().at(i)->get_number() << std::endl;
   }
-  std::cout << game.get_board()->get_stack()->get_cards().size() << std::endl;
   return 0;
 }

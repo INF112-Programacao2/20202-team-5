@@ -1,6 +1,6 @@
-#include "card.h"
+#include "coloredCard.h"
 
-class BlackCard {
+class BlackCard : public ColoredCard{
 public:
-  void pickColor();
+	void pickColor(std::string new_color);
 }

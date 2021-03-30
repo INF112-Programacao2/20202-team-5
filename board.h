@@ -1,15 +1,15 @@
 #include<string>
 #include<vector>
 #include "deck.h"
-#include "stack.h"
+//#include "stack.h"
 
 class Board {
 private:
   int _number;
   std::string _color;
-  int _orientation; //1 => clockwise, -1 => counter clockwise
+  int _orientation; //0 => clockwise, 1 => counter clockwise
   Deck* _deck;
-  Stack* _stack;
+  //Stack _stack;
 public:
   Board();
   int get_number();
@@ -17,9 +17,5 @@ public:
   std::string get_color();
   void set_color(std::string color);
   Deck* get_deck();
-  Stack* get_stack();
   Deck* newDeck();
-  Stack* newStack();
-  int get_orientation();
-  void reverse_orientation();
 };

@@ -1,4 +1,5 @@
 #include "coloredCard.h"
+#include "hand.h"
 
 class ColoredDrawCard : public ColoredCard {
 private:
