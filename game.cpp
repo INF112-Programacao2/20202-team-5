@@ -38,10 +38,11 @@ void Game::set_active_player(int active_player) {
 }
 
 void Game::next_player() {
-  if (this->_active_player == this->_players - 1) {
+  this->_active_player += _board->get_orientation();
+  if (this->_active_player == this->_players) {
     this->_active_player = 0;
-  } else {
-    this->_active_player++;
+  } else if (_active_player == -1) {
+    this->_active_player = this->_players - 1;
   }
 }
 

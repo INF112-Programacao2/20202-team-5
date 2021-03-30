@@ -1,3 +1,6 @@
+#ifndef CARD_H
+#define CARD_H
+
 #include<string>
 
 class Card {
@@ -6,3 +9,5 @@ public:
   virtual int get_number()=0;
   virtual bool isPlayable();
 };
+
+#endif

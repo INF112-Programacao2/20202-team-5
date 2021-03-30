@@ -1,6 +1,6 @@
 #include "blackCard.h"
 
-class WildCard : public BlackCard {
+class Plus4 : public BlackCard {
 public:
-	WildCard();
+  wildCard();
 }
