@@ -1,6 +1,6 @@
 
-output: main.o board.o card.o coloredCard.o deck.o game.o numberedCard.o player.o
-	g++ main.o board.o card.o coloredCard.o deck.o game.o numberedCard.o player.o -o output
+output: main.o board.o card.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o
+	g++ main.o board.o card.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o -o output
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -25,6 +25,9 @@ numberedCard.o: numberedCard.cpp numberedCard.h
 
 player.o: player.cpp player.h
 	g++ -c player.cpp
+
+stack.o: stack.cpp stack.h
+	g++ -c stack.cpp
 
 clean:
 	rm *.o output
