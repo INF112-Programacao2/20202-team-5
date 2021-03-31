@@ -11,3 +11,7 @@ std::vector<Card*> Stack::get_cards() {
 Card* Stack::get_topCard() {
   return this->_cards.back();
 }
+
+void Stack::set_topCard(Card* card){
+  _cards.push_back(card);
+}
