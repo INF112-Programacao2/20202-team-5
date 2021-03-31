@@ -4,6 +4,8 @@
 #include<iostream>
 #include "game.h"
 
+Game game(2);
+
 int main()
 {
   /*
@@ -47,7 +49,7 @@ int main()
     al_destroy_timer(timer);
     al_destroy_event_queue(queue);
 */
-  Game game(2);
+  //Game game(2);
   std::cout << game.get_players() << ' ' << game.get_active_player() << std::endl;
   std::cout << game.get_playerList().size() << std::endl;
   std::cout << game.get_board()->get_number() << " / " << game.get_board()->get_color() << std::endl;
