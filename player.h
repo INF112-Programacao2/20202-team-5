@@ -7,6 +7,7 @@ private:
 //  Hand _hand;
 public:
   Player();
+  void set_skip(bool skip);
   int get_score();
   void set_score(int score);
 };

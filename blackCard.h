@@ -1,6 +1,6 @@
 #include <iostream>
 #include "card.h"
-#include "board.h"
+#include "game.h"
 
 class BlackCard : public Card {
 protected:

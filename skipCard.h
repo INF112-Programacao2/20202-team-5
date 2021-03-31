@@ -1,7 +1,8 @@
 #include "coloredCard.h"
+#include "game.h"
 
 class SkipCard : public ColoredCard {
 public:
-  SkipCard();
+  SkipCard(std::string color);
   void skip();
 }
