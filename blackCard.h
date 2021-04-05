@@ -3,8 +3,6 @@
 #include "game.h"
 
 class BlackCard : public Card {
-protected:
-	std::string _new_color=NULL;
 public:
-	void pickColor();
+	void pickColor(Game game);
 };

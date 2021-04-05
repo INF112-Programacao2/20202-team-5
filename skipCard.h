@@ -4,5 +4,5 @@
 class SkipCard : public ColoredCard {
 public:
   SkipCard(std::string color);
-  void skip();
-}
+  //void skip(Game game);
+};

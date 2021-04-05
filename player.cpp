@@ -5,8 +5,8 @@ Player::Player() {
   this->_skipped = false;
 }
 
-void Player.set_skip(bool skip){
-	_skipped=skip;
+void Player::set_skip(bool skip){
+	this->_skipped=skip;
 }
 
 int Player::get_score() {
