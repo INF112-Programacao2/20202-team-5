@@ -30,8 +30,7 @@ Card* Deck::newNumberedCard(std::string color, int number) {
 }
 
 Card* Deck::drawCards(){
-  int i = rand() % _cards.size();
-  Card* copy = _cards[i];
-  _cards.erase(_cards.begin() + i);
+  Card* copy = this->get_topCard()->get_copy();
+  this->_cards.erase(this->get_topCard());
   return copy;
 }
