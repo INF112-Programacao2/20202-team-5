@@ -1,5 +1,6 @@
 #include "deck.h"
 
+
 Deck::Deck(){
   this->fillDeck();
 }
@@ -26,4 +27,11 @@ Card* Deck::get_topCard() {
 Card* Deck::newNumberedCard(std::string color, int number) {
   Card* c = new NumberedCard(color, number);
   return c;
+}
+
+Card* Deck::drawCards(){
+  int i = rand() % _cards.size();
+  Card* copy = _cards[i];
+  _cards.erase(_cards.begin() + i);
+  return copy;
 }

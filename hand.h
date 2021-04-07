@@ -1,13 +1,15 @@
 #include<vector>
 #include "Card.h"
+#include "Deck.h"
+#include "Stack.h"
 
 class Hand {
 private:
-  vector<Card*> _cards;
+  std::vector<Card*> _cards;
 public:
-  Hand();
-  void draw(int ammount);
-  void play(Card card);
-  bool hasPlay();
+  Hand(int inittialNumberOfCards,Deck &deck);
+  void draw(int ammount,Deck &deck);
+  void play(Card* card,Stack &stack);
+  bool hasPlay(Card* stackTopCard);
   void noPlay();
 };
