@@ -10,4 +10,5 @@ public:
   void set_skip(bool skip);
   int get_score();
   void set_score(int score);
+  
 };
