@@ -1,6 +1,8 @@
+#include <iostream>
 #include "card.h"
+#include "game.h"
 
-class BlackCard {
+class BlackCard : public Card {
 public:
-  void pickColor();
-}
+	void pickColor(Game game);
+};

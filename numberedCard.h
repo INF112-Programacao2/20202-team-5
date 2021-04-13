@@ -8,4 +8,5 @@ public:
   NumberedCard(std::string color, int number);
   int get_number();
   void set_number(int number);
+  NumberedCard* copy();
 };

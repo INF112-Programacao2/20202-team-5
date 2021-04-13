@@ -15,6 +15,7 @@ public:
   int get_active_player();
   void set_active_player(int active_player);
   void next_player();
+  int get_next_player();
   Player* newPlayer();
   std::vector<Player*> get_playerList();
   Board* newBoard();

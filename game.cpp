@@ -46,6 +46,10 @@ void Game::next_player() {
   }
 }
 
+int Game::get_next_player() {
+  return ((this->_active_player + 1)%this->_players);
+}
+
 Player* Game::newPlayer() {
   Player* player = new Player();
   return player;

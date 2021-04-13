@@ -1,6 +1,9 @@
 #include "blackCard.h"
 
-class Plus4 : public BlackCard {
+class WildCard : public BlackCard {
 public:
-  wildCard();
-}
+  WildCard();
+  WildCard* copy();
+  int get_number() override;
+  std::string get_color() override;
+};
