@@ -1,5 +1,8 @@
+#ifndef STACK_H
+#define STACK_H
+
 #include<vector>
-#include "Card.h"
+#include "card.h"
 
 class Stack {
 private:
@@ -10,3 +13,5 @@ public:
   Card* get_topCard();
   void set_topCard(Card* card);
 };
+
+#endif

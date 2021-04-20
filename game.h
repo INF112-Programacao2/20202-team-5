@@ -1,3 +1,6 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include<vector>
 #include "board.h"
 #include "player.h"
@@ -22,3 +25,5 @@ public:
   Board* get_board();
   //int* scores();
 };
+
+#endif

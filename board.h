@@ -1,7 +1,11 @@
+#ifndef BLACKCARD_H
+#define BLACKCARD_H
+
 #include<string>
 #include<vector>
 #include "deck.h"
 #include "stack.h"
+#include "card.h"
 
 class Board {
 private:
@@ -23,3 +27,5 @@ public:
   int get_orientation();
   void reverse_orientation();
 };
+
+#endif
