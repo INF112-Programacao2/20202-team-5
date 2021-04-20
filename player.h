@@ -1,13 +1,13 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Hand.h"
+#include "hand.h"
 
 class Player {
 private:
   int _score;
   bool _skipped;
-  Hand _hand;
+  Hand* _hand;
 public:
   Player();
   void set_skip(bool skip);

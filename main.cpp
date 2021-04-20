@@ -3,6 +3,7 @@
 //#include <stdbool.h>
 #include<iostream>
 #include "game.h"
+#include "card.h"
 
 Game game(2);
 

@@ -1,4 +1,6 @@
 #include "game.h"
+#include "player.h"
+#include "board.h"
 
 Game::Game(int players) {
   if (players > 4) {

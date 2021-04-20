@@ -2,6 +2,7 @@
 #define SKIPCARD_H
 
 #include "coloredCard.h"
+#include "game.h"
 
 class SkipCard : public ColoredCard {
 public:

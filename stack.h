@@ -2,7 +2,8 @@
 #define STACK_H
 
 #include<vector>
-#include "card.h"
+//#include "card.h"
+class Card;
 
 class Stack {
 private:

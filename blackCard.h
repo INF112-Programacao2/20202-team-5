@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "card.h"
+#include "game.h"
+//class Game;
 
 class BlackCard : public Card {
 public:

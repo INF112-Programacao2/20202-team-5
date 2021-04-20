@@ -20,3 +20,7 @@ Plus4* Plus4::copy() {
 int Plus4::get_number() {
 	return -1;
 }
+
+std::string Plus4::get_color() {
+	return "black";
+}

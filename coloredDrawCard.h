@@ -2,6 +2,7 @@
 #define COLOREDDRAWCARD_H
 
 #include "coloredCard.h"
+#include "game.h"
 
 class ColoredDrawCard : public ColoredCard {
 private:

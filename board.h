@@ -1,11 +1,10 @@
-#ifndef BLACKCARD_H
-#define BLACKCARD_H
+#ifndef BOARD_H
+#define BOARD_H
 
 #include<string>
 #include<vector>
 #include "deck.h"
 #include "stack.h"
-#include "card.h"
 
 class Board {
 private:

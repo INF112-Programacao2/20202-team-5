@@ -3,7 +3,9 @@
 
 #include<vector>
 #include "board.h"
-#include "player.h"
+//#include "player.h"
+class Player;
+//class Board;
 
 class Game {
 private:

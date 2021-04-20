@@ -2,6 +2,7 @@
 #define PLUS4_H
 
 #include "blackCard.h"
+#include "game.h"
 
 class Plus4 : public BlackCard {
 private:
@@ -11,6 +12,7 @@ public:
   void forced_draw(Game game);
 	Plus4* copy() override;
 	int get_number() override;
+	std::string get_color() override;
 };
 
 #endif
