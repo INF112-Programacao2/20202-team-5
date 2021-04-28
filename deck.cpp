@@ -36,14 +36,14 @@ Card* Deck::get_topCard() {
 
 //get_topCards(int ammount);
 
- Card* Deck::newNumberedCard(std::string color, int number) {
+Card* Deck::newNumberedCard(std::string color, int number) {
   Card* c = new NumberedCard(color, number);
   return c;
 }
 
 Card* Deck::drawCards(){
   Card* copy = this->get_topCard()->copy();
-  this->_cards.erase(this->_cards.end());
+  this->_cards.erase(this->_cards.end() - 1);
   return copy;
 }
 

@@ -1,7 +1,7 @@
 #include "wildcard.h"
 
 WildCard::WildCard(){
-
+	this->_name = "wildcard";
 }
 
 WildCard* WildCard::copy() {

@@ -24,7 +24,7 @@ public:
   Card* newWildCard();
   Card* newPlus4();
   Card* newSkipCard(std::string color);
-  Card* newColoredDrawCard(std::string color); 
+  Card* newColoredDrawCard(std::string color);
 };
 
 #endif

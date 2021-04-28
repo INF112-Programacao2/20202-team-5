@@ -1,8 +1,9 @@
 #include "hand.h"
+#include "game.h"
+#include <iostream>
 
 Hand::Hand(Game game){
   this->_cards.clear();
-  this->draw(7, game);
 }
 
 void Hand::draw(int ammount, Game game){
@@ -31,4 +32,8 @@ void Hand::noPlay(Game game) {
     this->play(this->_cards.size() - 1, game);
   }
   game.next_player();
+}
+
+std::vector<Card*> Hand::get_cards() {
+  return this->_cards;
 }
