@@ -1,5 +1,5 @@
 #include "stack.h"
-
+#include "card.h"
 Stack::Stack() {
   this->_cards.clear();
 }

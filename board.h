@@ -1,3 +1,6 @@
+#ifndef BOARD_H
+#define BOARD_H
+
 #include<string>
 #include<vector>
 #include "deck.h"
@@ -23,3 +26,5 @@ public:
   int get_orientation();
   void reverse_orientation();
 };
+
+#endif
