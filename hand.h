@@ -1,13 +1,21 @@
+#ifndef HAND_H
+#define HAND_H
+
 #include<vector>
-#include "Card.h"
+#include "game.h"
+#include "card.h"
+class Game;
 
 class Hand {
 private:
-  vector<Card*> _cards;
+  std::vector<Card*> _cards;
 public:
-  Hand();
-  void draw(int ammount);
-  void play(Card card);
-  bool hasPlay();
-  void noPlay();
+  Hand(Game game);
+  void draw(int ammount, Game game);
+  void play(int card, Game game);
+  bool hasPlay(Game game);
+  void noPlay(Game game);
+  std::vector<Card*> get_cards();
 };
+
+#endif

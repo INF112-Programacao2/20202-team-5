@@ -2,9 +2,12 @@
 //#include <allegro5/allegro_font.h>
 //#include <stdbool.h>
 #include<iostream>
+#include<string>
 #include "game.h"
+//#include "hand.h"
+#include "card.h"
 
-Game game(2);
+//Game game();
 
 int main()
 {
@@ -56,6 +59,21 @@ int main()
   for(int i=0; i <game.get_board()->get_deck()->get_cards().size();i++) {
     std::cout << game.get_board()->get_deck()->get_cards().at(i)->get_color() << " / " << game.get_board()->get_deck()->get_cards().at(i)->get_number() << std::endl;
   }
-  std::cout << game.get_board()->get_stack()->get_cards().size() << std::endl;
+  //std::cout << game.get_board()->get_stack()->get_cards().size() << std::endl;
+
+  std::string command = "start";
+
+   while (command.compare("end") != 0) {
+    std::getline(std::cin,command);
+    if (command.compare("-showhand") == 0) {
+      int playerID = 0;
+      std::cout << "insert player:" << std::endl;
+      std::cin >> playerID;
+      for(int i = 0; i < game.get_playerList().at(playerID)->get_hand()->get_cards().size(); i++) {
+        std::cout << game.get_playerList().at(playerID)->get_hand()->get_cards().at(i)->get_name() << ' ';
+      }
+      std::cout << std::endl;
+    }
+  }
   return 0;
 }

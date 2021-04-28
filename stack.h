@@ -1,5 +1,9 @@
+#ifndef STACK_H
+#define STACK_H
+
 #include<vector>
-#include "Card.h"
+//#include "card.h"
+class Card;
 
 class Stack {
 private:
@@ -8,4 +12,7 @@ public:
   Stack();
   std::vector<Card*> get_cards();
   Card* get_topCard();
+  void set_topCard(Card* card);
 };
+
+#endif

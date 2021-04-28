@@ -4,6 +4,7 @@
 
 SkipCard::SkipCard(std::string color){
 	_color=color;
+	this->_name = "skipCard";
 }
 
 void SkipCard::skip(Game game){

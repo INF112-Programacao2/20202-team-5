@@ -3,8 +3,9 @@
 //Game game(2);
 
 ColoredDrawCard::ColoredDrawCard(std::string color){
-	_drawAmmount=2;
-	_color = color;
+	this->_drawAmmount=2;
+	this->_color = color;
+	this->_name = "coloredDrawCard";
 }
 
 void ColoredDrawCard::forceDraw(Game game){

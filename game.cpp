@@ -1,18 +1,10 @@
 #include "game.h"
+#include "player.h"
+#include "board.h"
+#include<iostream>
 
-Game::Game(int players) {
-  if (players > 4) {
-
-  } else if (players < 2) {
-
-  } else {
-    this->_players = players;
-  }
-  this->_active_player=0;
-  for(int i = 0; i<this->_players;i++) {
-    this->_playerList.push_back(this->newPlayer());
-  }
-  this->_board = this->newBoard();
+Game::Game() {
+  this->start(4);
 }
 
 int Game::get_players() {
@@ -51,7 +43,7 @@ int Game::get_next_player() {
 }
 
 Player* Game::newPlayer() {
-  Player* player = new Player();
+  Player* player = new Player(game);
   return player;
 }
 
@@ -68,4 +60,26 @@ Board* Game::newBoard() {
   return board;
 }
 
+void Game::start(int players) {
+  if (players > 4) {
+    std::cout << "Player number over limit\n";
+  } else if (players < 2) {
+    std::cout << "Player number under limit\n";
+  } else {
+    this->_players = players;
+  }
+
+  this->_active_player=0;
+
+  for(int i = 0; i<this->_players;i++) {
+    this->_playerList.push_back(this->newPlayer());
+  }
+  this->_board = this->newBoard();
+
+  for (int i = 0; i < this->get_players(); i++) {
+    this->get_playerList().at(i)->get_hand()->draw(7, game);
+  }
+}
+
+Game game;
 //int* Game::scores() {}

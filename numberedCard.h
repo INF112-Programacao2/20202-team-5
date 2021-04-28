@@ -1,3 +1,6 @@
+#ifndef NUMBEREDCARD_H
+#define NUMBEREDCARD_H
+
 #include<string>
 #include "coloredCard.h"
 
@@ -8,5 +11,7 @@ public:
   NumberedCard(std::string color, int number);
   int get_number();
   void set_number(int number);
-  NumberedCard* copy();
+  NumberedCard* copy() override;
 };
+
+#endif

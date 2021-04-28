@@ -1,15 +1,15 @@
 
-output: main.o board.o card.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o
-	g++ main.o board.o card.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o -o output
+output: main.o card.o board.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o hand.o plus4.o
+	g++ main.o card.o board.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o hand.o plus4.o -o output
 
 main.o: main.cpp
 	g++ -c main.cpp
 
-board.o: board.cpp board.h
-	g++ -c board.cpp
-
 card.o: card.cpp card.h
 	g++ -c card.cpp
+
+board.o: board.cpp board.h
+	g++ -c board.cpp
 
 coloredCard.o: coloredCard.cpp coloredCard.h
 	g++ -c coloredCard.cpp
@@ -41,5 +41,11 @@ skipCard.o: skipCard.cpp skipCard.h
 wildCard.o: wildCard.cpp wildCard.h
 	g++ -c wildCard.cpp
 
+hand.o: hand.cpp hand.h
+	g++ -c hand.cpp
+
+plus4.o: plus4.cpp plus4.h
+	g++ -c plus4.cpp
+
 clean:
-	rm *.o output
+	rm *.exe.stackdump *.h.gch *.ghc *.o output

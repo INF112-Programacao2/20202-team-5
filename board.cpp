@@ -1,12 +1,14 @@
+#include<iostream>
 #include "board.h"
 
 Board::Board() {
   this->_number = 0;
   this->_color = "blue";
-  this->_orientation = 0; //0 => clockwise, 1 => counter clockwise
+  this->_orientation = 1;
   this->_deck = newDeck();
   this->_stack = newStack();
 }
+
 int Board::get_number() {
   return this->_number;
 }

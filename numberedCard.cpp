@@ -3,6 +3,7 @@
 NumberedCard::NumberedCard(std::string color, int number) {
   this->_color = color;
   this->_number = number;
+  this->_name = "numberedCard";
 }
 
 int NumberedCard::get_number() {

@@ -1,6 +1,13 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include<vector>
 #include "board.h"
 #include "player.h"
+//class Player;
+//class Board;
+
+class Player;
 
 class Game {
 private:
@@ -9,7 +16,7 @@ private:
   int _active_player;
   Board* _board;
 public:
-  Game(int players);
+  Game();//int players);
   int get_players();
   void set_players(int players);
   int get_active_player();
@@ -20,5 +27,10 @@ public:
   std::vector<Player*> get_playerList();
   Board* newBoard();
   Board* get_board();
+  void start(int players);
   //int* scores();
 };
+
+extern Game game;
+
+#endif
