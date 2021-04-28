@@ -1,4 +1,4 @@
-#include "wildcard.h"
+#include "wildCard.h"
 
 WildCard::WildCard(){
 	this->_name = "wildcard";
