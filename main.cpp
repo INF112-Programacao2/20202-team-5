@@ -52,7 +52,7 @@ int main() {
             redraw = true;
         else if((event.type == ALLEGRO_EVENT_KEY_DOWN) || (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)){
            while (command.compare("end") != 0) {
-            std::cout << "imput command: \n";
+            std::cout << "input command: \n";
             std::getline(std::cin,command);
             if (command.compare("-showhand") == 0) {
               int playerID = 0;
