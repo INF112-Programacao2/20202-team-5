@@ -7,7 +7,7 @@
 //class Game;
 
 class BlackCard : public Card {
-public:
+protected:
 	void pickColor(Game game);
 };
 

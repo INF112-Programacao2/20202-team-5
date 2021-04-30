@@ -1,6 +1,6 @@
 
 output: main.o card.o board.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o hand.o plus4.o
-	g++ main.o card.o board.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o hand.o plus4.o -o output
+	g++ main.o card.o board.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o hand.o plus4.o -o output -I/usr/include/allegro5 -L/usr/lib -lallegro -lallegro_main -lallegro_font -lallegro_image
 
 main.o: main.cpp
 	g++ -c main.cpp

@@ -4,6 +4,7 @@ NumberedCard::NumberedCard(std::string color, int number) {
   this->_color = color;
   this->_number = number;
   this->_name = "numberedCard";
+  this->_spriteName = "sprites/" + color + std::to_string(number) + ".bmp";
 }
 
 int NumberedCard::get_number() {

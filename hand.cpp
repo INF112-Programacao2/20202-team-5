@@ -9,6 +9,7 @@ Hand::Hand(Game game){
 void Hand::draw(int ammount, Game game){
   for (int i=0; i<ammount; i++){
     this->_cards.push_back(game.get_board()->get_deck()->drawCards());
+    game.get_board()->get_deck()->get_cards().back()->set_sprite(al_load_bitmap(game.get_board()->get_deck()->get_cards().back()->get_spriteName().c_str()));
   }
 }
 

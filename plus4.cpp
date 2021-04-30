@@ -5,6 +5,7 @@
 Plus4::Plus4(){
 	_cards_to_draw=4;
 	this->_name = "plus4";
+	this->_spriteName = "sprites/plus4.bmp";
 }
 
 void Plus4::forced_draw(Game game){

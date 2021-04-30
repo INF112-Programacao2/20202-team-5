@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "deck.h"
 #include "card.h"
 #include "wildCard.h"
@@ -7,6 +8,7 @@
 
 Deck::Deck(){
   this->fillDeck();
+  this->shuffle();
 }
 
 std::vector<Card*> Deck::get_cards() {
@@ -66,4 +68,8 @@ Card* Deck::newSkipCard(std::string color) {
 Card* Deck::newColoredDrawCard(std::string color) {
   Card* c = new ColoredDrawCard(color);
   return c;
+}
+
+void Deck::shuffle() {
+  std::random_shuffle (this->_cards.begin(), this->_cards.end());
 }

@@ -6,6 +6,7 @@ ColoredDrawCard::ColoredDrawCard(std::string color){
 	this->_drawAmmount=2;
 	this->_color = color;
 	this->_name = "coloredDrawCard";
+	this->_spriteName = "sprites/" + color + "+2.bmp";
 }
 
 void ColoredDrawCard::forceDraw(Game game){

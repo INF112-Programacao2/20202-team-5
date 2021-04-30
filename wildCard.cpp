@@ -2,6 +2,7 @@
 
 WildCard::WildCard(){
 	this->_name = "wildcard";
+	this->_spriteName = "sprites/wildcard.bmp";
 }
 
 WildCard* WildCard::copy() {

@@ -5,6 +5,7 @@
 SkipCard::SkipCard(std::string color){
 	_color=color;
 	this->_name = "skipCard";
+	this->_spriteName = "sprites/" + color + "skip.bmp";
 }
 
 void SkipCard::skip(Game game){
