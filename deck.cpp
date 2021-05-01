@@ -71,5 +71,5 @@ Card* Deck::newColoredDrawCard(std::string color) {
 }
 
 void Deck::shuffle() {
-  std::random_shuffle (this->_cards.begin(), this->_cards.end());
+  std::random_shuffle(this->_cards.begin(), this->_cards.end());
 }

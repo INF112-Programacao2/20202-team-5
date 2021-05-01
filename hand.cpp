@@ -15,21 +15,23 @@ void Hand::draw(int ammount, Game game){
 
 void Hand::play(int card, Game game){
   game.get_board()->get_stack()->set_topCard(this->_cards.at(card)->copy());
-  _cards.erase(this->_cards.begin() + card);
+  this->_cards.erase(this->_cards.begin() + card);
+  //game.next_player();
 }
 
 bool Hand::hasPlay(Game game){
-    for(int i=0;i < _cards.size();i++){
-        if((_cards.at(i)->get_color() == game.get_board()->get_stack()->get_topCard()->get_color()) || (_cards.at(i)->get_number() == game.get_board()->get_stack()->get_topCard()->get_number())) {
-            return true;
+    for(int i = 0; i < this->_cards.size(); i++){
+        if((this->_cards.at(i)->get_color() == game.get_board()->get_stack()->get_color()) || (this->_cards.at(i)->get_number() == game.get_board()->get_stack()->get_number())) {
+          return true;
         }
     }
+    //this->noPlay(game);
     return false;
 }
 
 void Hand::noPlay(Game game) {
   this->draw(1, game);
-  if (this->_cards.back()->get_color() == game.get_board()->get_stack()->get_topCard()->get_color() || this->_cards.back()->get_number() == game.get_board()->get_stack()->get_topCard()->get_number()) {
+  if (this->_cards.back()->get_color() == game.get_board()->get_stack()->get_color() || this->_cards.back()->get_number() == game.get_board()->get_stack()->get_number()) {
     this->play(this->_cards.size() - 1, game);
   }
   game.next_player();

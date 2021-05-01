@@ -6,6 +6,8 @@
 #include "deck.h"
 #include "stack.h"
 
+class Stack;
+
 class Board {
 private:
   int _number;

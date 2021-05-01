@@ -21,25 +21,27 @@ void Game::set_players(int players) {
   }
 }
 
-int Game::get_active_player() {
-  return this->_active_player;
+int Game::get_activePlayer() {
+  return this->_activePlayer;
 }
 
-void Game::set_active_player(int active_player) {
-  this->_active_player = active_player;
+void Game::set_activePlayer(int activePlayer) {
+  this->_activePlayer = activePlayer;
 }
 
 void Game::next_player() {
-  this->_active_player += _board->get_orientation();
-  if (this->_active_player == this->_players) {
-    this->_active_player = 0;
-  } else if (_active_player == -1) {
-    this->_active_player = this->_players - 1;
+  this->_activePlayer += this->_board->get_orientation();
+  if (this->_activePlayer == this->_players) {
+    this->_activePlayer = 0;
+  } else if (this->_activePlayer == -1) {
+    this->_activePlayer = this->_players - 1;
   }
+  std::cout << this->_players << " " << this->_activePlayer << std::endl;
+  //this->_playerList.at(this->_activePlayer)->get_hand()->hasPlay(game);
 }
 
 int Game::get_next_player() {
-  return ((this->_active_player + 1)%this->_players);
+  return ((this->_activePlayer + 1)%this->_players);
 }
 
 Player* Game::newPlayer() {
@@ -69,16 +71,20 @@ void Game::start(int players) {
     this->_players = players;
   }
 
-  this->_active_player=0;
-
   for(int i = 0; i<this->_players;i++) {
     this->_playerList.push_back(this->newPlayer());
   }
   this->_board = this->newBoard();
 
+  this->_activePlayer=0;
+
   for (int i = 0; i < this->get_players(); i++) {
     this->get_playerList().at(i)->get_hand()->draw(7, game);
   }
+
+  this->_board->get_stack()->begin(game);
+
+  this->_playerList.at(this->_activePlayer)->get_hand()->hasPlay(game);
 }
 
 Game game;
