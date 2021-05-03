@@ -70,6 +70,10 @@ Card* Deck::newColoredDrawCard(std::string color) {
   return c;
 }
 
+int myrandom (int random) {
+	return std::rand()%random;
+}
+
 void Deck::shuffle() {
-  std::random_shuffle(this->_cards.begin(), this->_cards.end());
+  std::random_shuffle(this->_cards.begin(), this->_cards.end(), myrandom);
 }
