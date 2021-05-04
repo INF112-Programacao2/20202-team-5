@@ -84,6 +84,7 @@ int main() {
               std::cout << "insert card number:" << std::endl;
               std::cin >> cardNumber;
               game.get_playerList().at(playerID)->get_hand()->draw(cardNumber, game);
+              loadSprites();
             }
             if (command.compare("-playcard") == 0) {
               int card;
@@ -91,8 +92,10 @@ int main() {
                 std::cout << "insert card: \n";
                 std::cin >> card;
                 if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(card)->isPlayable()) {
+                  //game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(card)->onPlay(game);
                   game.get_playerList().at(game.get_activePlayer())->get_hand()->play(card, game);
                   game.next_player();
+                  loadSprites();
                   break;
                 }
               }
@@ -105,8 +108,7 @@ int main() {
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
             al_draw_text(font, al_map_rgb(255, 255, 255), 0, 0, 0, "Hello world!");
-            al_flip_display();
-
+            //al_flip_display();
             for (int i = 0; i < game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().size(); i++)  {
               if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(i)->get_sprite() != NULL) {
                 //al_draw_bitmap(game.get_playerList().at(0)->get_hand()->get_cards().at(i)->get_sprite(), 100 + (100 * i), al_get_display_height(al_get_current_display()) - al_get_bitmap_height(azul0), 0);

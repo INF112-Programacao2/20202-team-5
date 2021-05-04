@@ -8,10 +8,8 @@ Plus4::Plus4(){
 	this->_spriteName = "sprites/plus4.bmp";
 }
 
-void Plus4::forced_draw(Game game){
-	Plus4::pickColor(game);
-	//game.get_playerList().at(game.get_next_player())->get_hand().draw(_cards_to_draw)
-
+void Plus4::forceDraw(Game game){
+	game.get_playerList().at(game.get_next_player())->get_hand()->draw(this->_cards_to_draw, game);
 }
 
 Plus4* Plus4::copy() {
@@ -25,4 +23,9 @@ int Plus4::get_number() {
 
 std::string Plus4::get_color() {
 	return "black";
+}
+
+void Plus4::onPlay(Game game) {
+	this->forceDraw(game);
+	this->pickColor(game);
 }

@@ -17,3 +17,7 @@ int WildCard::get_number() {
 std::string WildCard::get_color() {
 	return "black";
 }
+
+void WildCard::onPlay(Game game) {
+	pickColor(game);
+}

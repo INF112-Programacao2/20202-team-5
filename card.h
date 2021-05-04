@@ -5,7 +5,8 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_image.h>
 #include<string>
-//#include "game.h"
+
+class Game;
 
 class Card {
 protected:
@@ -21,6 +22,7 @@ public:
   ALLEGRO_BITMAP* get_sprite();
   std::string get_spriteName();
   void set_sprite(ALLEGRO_BITMAP* sprite);
+  virtual void onPlay(Game game)=0;
 };
 
 #endif

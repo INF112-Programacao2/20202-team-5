@@ -10,7 +10,7 @@ ColoredDrawCard::ColoredDrawCard(std::string color){
 }
 
 void ColoredDrawCard::forceDraw(Game game){
-	//game.get_playerList().at(game.get_next_player())->get_hand().draw(_drawAmmount)
+	game.get_playerList().at(game.get_next_player())->get_hand()->draw(this->_drawAmmount, game);
 }
 
 ColoredDrawCard* ColoredDrawCard::copy() {
@@ -20,4 +20,8 @@ ColoredDrawCard* ColoredDrawCard::copy() {
 
 int ColoredDrawCard::get_number() {
 	return -1;
+}
+
+void ColoredDrawCard::onPlay(Game game) {
+	this->forceDraw(game);
 }

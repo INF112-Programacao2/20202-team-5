@@ -1,4 +1,5 @@
 #include "card.h"
+#include "game.h"
 
 std::string Card::get_name() {
   return this->_name;

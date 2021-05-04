@@ -9,10 +9,11 @@ private:
 	int _cards_to_draw;
 public:
   Plus4();
-  void forced_draw(Game game);
+  void forceDraw(Game game);
 	Plus4* copy() override;
 	int get_number() override;
 	std::string get_color() override;
+	void onPlay(Game game) override;
 };
 
 #endif

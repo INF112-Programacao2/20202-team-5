@@ -9,11 +9,11 @@ SkipCard::SkipCard(std::string color){
 }
 
 void SkipCard::skip(Game game){
-	//game.get_player_list().at(game.get_next_player())->set_skip(true);
+	game.get_playerList().at(game.get_next_player())->set_skip(true);
 }
 
 SkipCard* SkipCard::copy() {
-	SkipCard* c = new SkipCard(_color);
+	SkipCard* c = new SkipCard(this->_color);
 	return c;
 }
 
@@ -23,4 +23,8 @@ int SkipCard::get_number() {
 
 std::string SkipCard::get_color() {
 	return this->_color;
+}
+
+void SkipCard::onPlay(Game game) {
+	this->skip(game);
 }

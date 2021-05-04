@@ -9,12 +9,14 @@ Hand::Hand(Game game){
 void Hand::draw(int ammount, Game game){
   for (int i=0; i<ammount; i++){
     this->_cards.push_back(game.get_board()->get_deck()->drawCards());
+    std::cout << this->_cards.back()->get_name() << std::endl;
     game.get_board()->get_deck()->get_cards().back()->set_sprite(al_load_bitmap(game.get_board()->get_deck()->get_cards().back()->get_spriteName().c_str()));
   }
 }
 
 void Hand::play(int card, Game game){
   game.get_board()->get_stack()->set_topCard(this->_cards.at(card)->copy());
+  this->_cards.at(card)->onPlay(game);
   this->_cards.erase(this->_cards.begin() + card);
   //game.next_player();
 }

@@ -1,4 +1,5 @@
 #include "numberedCard.h"
+#include "game.h"
 
 NumberedCard::NumberedCard(std::string color, int number) {
   this->_color = color;
@@ -19,3 +20,5 @@ NumberedCard* NumberedCard::copy() {
 	NumberedCard* c = new NumberedCard(_color, _number);
 	return c;
 }
+
+void NumberedCard::onPlay(Game game) {}
