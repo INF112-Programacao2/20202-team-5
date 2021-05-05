@@ -3,17 +3,109 @@
 #include <allegro5/allegro_image.h>
 #include <stdbool.h>
 #include<iostream>
+#include<cmath>
 #include<string>
 #include "game.h"
 #include "card.h"
 
+ALLEGRO_BITMAP* cardBack;
+
 void loadSprites() {
-  for (int i = 0; i < game.get_board()->get_deck()->get_cards().size(); i++) {
-    game.get_board()->get_deck()->get_cards().at(i)->set_sprite(al_load_bitmap(game.get_board()->get_deck()->get_cards().at(i)->get_spriteName().c_str()));
-  }
+  //for (int i = 0; i < game.get_board()->get_deck()->get_cards().size(); i++) {
+  //  game.get_board()->get_deck()->get_cards().at(i)->set_sprite(al_load_bitmap(game.get_board()->get_deck()->get_cards().at(i)->get_spriteName().c_str()));
+  //}
   for (int j = 0; j < game.get_players(); j++) {
     for(int i = 0; i < game.get_playerList().at(j)->get_hand()->get_cards().size(); i++) {
       game.get_playerList().at(j)->get_hand()->get_cards().at(i)->set_sprite(al_load_bitmap(game.get_playerList().at(j)->get_hand()->get_cards().at(i)->get_spriteName().c_str()));
+    }
+  }
+}
+
+void drawTwo(bool show) {
+
+}
+
+void drawFour(bool show) {
+  int playerNumber = game.get_players();
+  int activePlayerSize = 0;
+  double playerScale = 0.5;
+  //ALLEGRO_BITMAP* cardBack = al_load_bitmap("sprites/cardback.bmp");
+  int cardWidth = 130;
+  int cardHeight = 182;
+
+  if (show) {
+    Player* drawPlayer = game.get_playerList().at((game.get_activePlayer()+1)%playerNumber);
+    activePlayerSize = drawPlayer->get_hand()->get_cards().size();
+
+    for (int j = 0; j < drawPlayer->get_hand()->get_cards().size(); j++) {
+      al_draw_scaled_rotated_bitmap(drawPlayer->get_hand()->get_cards().at(j)->get_sprite(),
+      0, 0,
+      (182 * playerScale), (al_get_display_height(al_get_current_display())/2) - (25 * activePlayerSize) + (50 * j),
+      playerScale, playerScale,
+      M_PI/2, 0);
+    }
+
+    drawPlayer = game.get_playerList().at((game.get_activePlayer()+2)%playerNumber);
+    activePlayerSize = drawPlayer->get_hand()->get_cards().size();
+    for (int j = 0; j < drawPlayer->get_hand()->get_cards().size(); j++) {
+      al_draw_scaled_rotated_bitmap(drawPlayer->get_hand()->get_cards().at(j)->get_sprite(),
+      0, 0,
+      (al_get_display_width(al_get_current_display())/2) - (25 * activePlayerSize) + (50 * j), (182 * playerScale),
+      playerScale, playerScale,
+      M_PI, 0);
+    }
+
+    drawPlayer = game.get_playerList().at((game.get_activePlayer()+3)%playerNumber);
+    activePlayerSize = drawPlayer->get_hand()->get_cards().size();
+    for (int j = 0; j < drawPlayer->get_hand()->get_cards().size(); j++) {
+      al_draw_scaled_rotated_bitmap(drawPlayer->get_hand()->get_cards().at(j)->get_sprite(),
+      0, 0,
+      al_get_display_width(al_get_current_display()) - (182 * playerScale), (al_get_display_height(al_get_current_display())/2) - (25 * activePlayerSize) + (50 * j),
+      playerScale, playerScale,
+      -M_PI/2, 0);
+    }
+  } else {
+    Player* drawPlayer = game.get_playerList().at((game.get_activePlayer()+1)%playerNumber);
+    activePlayerSize = drawPlayer->get_hand()->get_cards().size();
+    for (int j = 0; j < activePlayerSize; j++) {
+      al_draw_scaled_rotated_bitmap(cardBack,
+      0, 0,
+      (182 * playerScale), (al_get_display_height(al_get_current_display())/2) - (25 * activePlayerSize) + (50 * j),
+      playerScale, playerScale,
+      M_PI/2, 0);
+    }
+
+    drawPlayer = game.get_playerList().at((game.get_activePlayer()+2)%playerNumber);
+    activePlayerSize = drawPlayer->get_hand()->get_cards().size();
+    for (int j = 0; j < activePlayerSize; j++) {
+      al_draw_scaled_rotated_bitmap(cardBack,
+      0, 0,
+      (al_get_display_width(al_get_current_display())/2) - (25 * activePlayerSize) + (50 * j), (182 * playerScale),
+      playerScale, playerScale,
+      M_PI, 0);
+    }
+
+    drawPlayer = game.get_playerList().at((game.get_activePlayer()+3)%playerNumber);
+    activePlayerSize = drawPlayer->get_hand()->get_cards().size();
+    for (int j = 0; j < activePlayerSize; j++) {
+      al_draw_scaled_rotated_bitmap(cardBack,
+      0, 0,
+      al_get_display_width(al_get_current_display()) - (182 * playerScale), (al_get_display_height(al_get_current_display())/2) - (25 * activePlayerSize) + (50 * j),
+      playerScale, playerScale,
+      -M_PI/2, 0);
+    }
+  }
+
+  activePlayerSize = game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().size();
+  for (int i = 0; i < activePlayerSize; i++)  {
+    if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(i)->get_sprite() != NULL) {
+      al_draw_scaled_bitmap(game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(i)->get_sprite(),
+        0, 0,                                // source origin
+        cardWidth, cardHeight,
+        (al_get_display_width(al_get_current_display())/2) - (50 * activePlayerSize) + (100 * i), al_get_display_height(al_get_current_display()) - 182,                                // target origin
+        130, 182 ,                                // target dimensions
+        0                                    // flags
+      );
     }
   }
 }
@@ -29,7 +121,7 @@ int main() {
     ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
     ALLEGRO_DISPLAY* disp = al_create_display(1200, 900);
     ALLEGRO_FONT* font = al_create_builtin_font();
-    ALLEGRO_BITMAP* azul0 = al_load_bitmap("sprites/blue0.bmp");
+    cardBack = al_load_bitmap("sprites/cardback.bmp");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_display_event_source(disp));
@@ -73,7 +165,7 @@ int main() {
               al_destroy_display(disp);
               al_destroy_timer(timer);
               al_destroy_event_queue(queue);
-              al_destroy_bitmap(azul0);
+              al_destroy_bitmap(cardBack);
               return 0;
             }
             if (command.compare("-drawcards") == 0) {
@@ -107,22 +199,8 @@ int main() {
         if(redraw && al_is_event_queue_empty(queue))
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
-            al_draw_text(font, al_map_rgb(255, 255, 255), 0, 0, 0, "Hello world!");
-            //al_flip_display();
-            for (int i = 0; i < game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().size(); i++)  {
-              if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(i)->get_sprite() != NULL) {
-                //al_draw_bitmap(game.get_playerList().at(0)->get_hand()->get_cards().at(i)->get_sprite(), 100 + (100 * i), al_get_display_height(al_get_current_display()) - al_get_bitmap_height(azul0), 0);
-                al_draw_scaled_bitmap(game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(i)->get_sprite(),
-                  0, 0,                                // source origin
-                  al_get_bitmap_width(azul0),     // source width
-                  al_get_bitmap_height(azul0),    // source height
-                  100 + (100 * i), al_get_display_height(al_get_current_display()) - 182,                                // target origin
-                  130, 182,                                // target dimensions
-                  0                                    // flags
-                );
-              }
-            }
 
+            drawFour(false);
 
             al_flip_display();
 
