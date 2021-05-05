@@ -5,7 +5,7 @@
 #include <string>
 #include "game.h"
 
-class ReverseCard :: public ColoredCard{
+class ReverseCard : public ColoredCard{
 	public:
 		ReverseCard();
 		ReverseCard* copy() override;
