@@ -13,9 +13,9 @@ int Game::get_players() {
 
 void Game::set_players(int players) {
   if (players > 4) {
-
+	std::cout<<"It can only have a maximum of 4 players!. "<<std::endl;
   } else if (players < 2) {
-
+	std::cout<<"There must be at least 2 players !. "<<std::endl;
   } else {
     this->_players = players;
   }
