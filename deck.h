@@ -4,6 +4,7 @@
 #include<vector>
 #include <stdlib.h>
 #include "numberedCard.h"
+
 class Card;
 class WildCard;
 class Plus4;
@@ -13,6 +14,7 @@ class ColoredDrawCard;
 class Deck {
 private:
   std::vector<Card*> _cards;
+  int _rand;
 public:
   Deck();
   std::vector<Card*> get_cards();
@@ -25,6 +27,7 @@ public:
   Card* newPlus4();
   Card* newSkipCard(std::string color);
   Card* newColoredDrawCard(std::string color);
+  int random(int i);
   void shuffle();
 };
 

@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <ctime>
 #include "deck.h"
 #include "card.h"
 #include "wildCard.h"
@@ -70,6 +71,12 @@ Card* Deck::newColoredDrawCard(std::string color) {
   return c;
 }
 
+int ramdon(int i){
+	return std::rand()%60;
+	
+}
+
 void Deck::shuffle() {
-  std::random_shuffle(this->_cards.begin(), this->_cards.end());
+  std::srand (unsigned(std::time(0)));
+  std::random_shuffle(this->_cards.begin(),this->_cards.end(), ramdon);
 }
