@@ -19,6 +19,8 @@ void loadSprites() {
       game.get_playerList().at(j)->get_hand()->get_cards().at(i)->set_sprite(al_load_bitmap(game.get_playerList().at(j)->get_hand()->get_cards().at(i)->get_spriteName().c_str()));
     }
   }
+
+  game.get_board()->get_stack()->get_cards().back()->set_sprite(al_load_bitmap(game.get_board()->get_stack()->get_cards().back()->get_spriteName().c_str()));
 }
 
 void drawTwo(bool show) {
@@ -201,6 +203,22 @@ int main() {
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
             drawFour(false);
+
+            al_draw_scaled_bitmap(cardBack,
+              0, 0,                                // source origin
+              130, 182,
+              (al_get_display_width(al_get_current_display()) * 0.2), al_get_display_height(al_get_current_display()) * 0.2,                                // target origin
+              130 * 0.75, 182 * 0.75,                                // target dimensions
+              0                                    // flags
+            );
+
+            al_draw_scaled_bitmap(game.get_board()->get_stack()->get_cards().back()->get_sprite(),
+              0, 0,                                // source origin
+              130, 182,
+              (al_get_display_width(al_get_current_display())/2) - 65, al_get_display_height(al_get_current_display())/2 - 91,                                // target origin
+              130, 182 ,                                // target dimensions
+              0                                    // flags
+            );
 
             al_flip_display();
 
