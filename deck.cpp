@@ -71,21 +71,12 @@ Card* Deck::newColoredDrawCard(std::string color) {
   return c;
 }
 
-<<<<<<< HEAD
 int ramdon(int i){
-	return std::rand()%60;
+	return std::rand()%660;
 	
 }
 
 void Deck::shuffle() {
   std::srand (unsigned(std::time(0)));
   std::random_shuffle(this->_cards.begin(),this->_cards.end(), ramdon);
-=======
-int myrandom (int random) {
-	return std::rand()%random;
-}
-
-void Deck::shuffle() {
-  std::random_shuffle(this->_cards.begin(), this->_cards.end(), myrandom);
->>>>>>> f8a1f14432173170d5178e6ddf94c542add1df3e
 }

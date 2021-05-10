@@ -27,11 +27,7 @@ public:
   Card* newPlus4();
   Card* newSkipCard(std::string color);
   Card* newColoredDrawCard(std::string color);
-<<<<<<< HEAD
   int random(int i);
-=======
-  int myrandom (int random);
->>>>>>> f8a1f14432173170d5178e6ddf94c542add1df3e
   void shuffle();
 };
 

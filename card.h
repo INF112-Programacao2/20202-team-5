@@ -1,9 +1,9 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_image.h>
+//#include <allegro5/allegro5.h>
+//#include <allegro5/allegro_font.h>
+//#include <allegro5/allegro_image.h>
 #include<string>
 
 class Game;
@@ -11,7 +11,7 @@ class Game;
 class Card {
 protected:
   std::string _name;
-  ALLEGRO_BITMAP* _sprite;
+ // ALLEGRO_BITMAP* _sprite;
   std::string _spriteName;
 public:
   virtual std::string get_color()=0;
