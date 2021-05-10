@@ -19,6 +19,22 @@ void loadSprites() {
       game.get_playerList().at(j)->get_hand()->get_cards().at(i)->set_sprite(al_load_bitmap(game.get_playerList().at(j)->get_hand()->get_cards().at(i)->get_spriteName().c_str()));
     }
   }
+
+  game.get_board()->get_stack()->get_cards().back()->set_sprite(al_load_bitmap(game.get_board()->get_stack()->get_cards().back()->get_spriteName().c_str()));
+}
+
+int ClickedCard() {
+  ALLEGRO_MOUSE_STATE state;
+  al_get_mouse_state(&state);
+  int PlayerSize = game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().size();
+  for (int i = 0; i < PlayerSize; i++) {
+    int cardPosX = (al_get_display_width(al_get_current_display())/2) - (50 * PlayerSize) + (100 * i);
+    int cardPosY = al_get_display_height(al_get_current_display()) - 182;
+    if (state.x > cardPosX && state.x < cardPosX + 130 && state.y > cardPosY && state.y < cardPosY + 182) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 void drawTwo(bool show) {
@@ -29,7 +45,6 @@ void drawFour(bool show) {
   int playerNumber = game.get_players();
   int activePlayerSize = 0;
   double playerScale = 0.5;
-  //ALLEGRO_BITMAP* cardBack = al_load_bitmap("sprites/cardback.bmp");
   int cardWidth = 130;
   int cardHeight = 182;
 
@@ -113,6 +128,7 @@ void drawFour(bool show) {
 int main() {
     al_init();
     al_install_keyboard();
+    al_install_mouse();
     al_init_image_addon();
 
     loadSprites();
@@ -124,6 +140,7 @@ int main() {
     cardBack = al_load_bitmap("sprites/cardback.bmp");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
+    al_register_event_source(queue, al_get_mouse_event_source());
     al_register_event_source(queue, al_get_display_event_source(disp));
     al_register_event_source(queue, al_get_timer_event_source(timer));
 
@@ -194,6 +211,13 @@ int main() {
             }
           }
           redraw = true;
+        } else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+            if (ClickedCard() != -1) {
+              game.get_playerList().at(game.get_activePlayer())->get_hand()->play(ClickedCard(), game);
+              game.next_player();
+              loadSprites();
+              redraw = true;
+            }
         }
 
         if(redraw && al_is_event_queue_empty(queue))
@@ -201,6 +225,22 @@ int main() {
             al_clear_to_color(al_map_rgb(0, 0, 0));
 
             drawFour(false);
+
+            al_draw_scaled_bitmap(cardBack,
+              0, 0,                                // source origin
+              130, 182,
+              (al_get_display_width(al_get_current_display()) * 0.2), al_get_display_height(al_get_current_display()) * 0.2,                                // target origin
+              130 * 0.75, 182 * 0.75,                                // target dimensions
+              0                                    // flags
+            );
+
+            al_draw_scaled_bitmap(game.get_board()->get_stack()->get_cards().back()->get_sprite(),
+              0, 0,                                // source origin
+              130, 182,
+              (al_get_display_width(al_get_current_display())/2) - 65, al_get_display_height(al_get_current_display())/2 - 91,                                // target origin
+              130, 182 ,                                // target dimensions
+              0                                    // flags
+            );
 
             al_flip_display();
 
