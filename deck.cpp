@@ -72,7 +72,7 @@ Card* Deck::newColoredDrawCard(std::string color) {
 }
 
 int ramdon(int i){
-	return std::rand()%660;
+	return std::rand()%60;
 	
 }
 
