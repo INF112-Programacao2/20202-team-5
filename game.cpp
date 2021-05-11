@@ -41,7 +41,14 @@ void Game::next_player() {
 }
 
 int Game::get_next_player() {
-  return ((this->_activePlayer + 1)%this->_players);
+  int r = this->_activePlayer;
+  r += this->_board->get_orientation();
+  if (r == this->_players) {
+    return 0;
+  } else if (r == -1) {
+    return this->_players - 1;
+  }
+  return r;
 }
 
 Player* Game::newPlayer() {

@@ -9,6 +9,7 @@ class WildCard;
 class Plus4;
 class SkipCard;
 class ColoredDrawCard;
+class ReverseCard;
 
 class Deck {
 private:
@@ -25,6 +26,7 @@ public:
   Card* newPlus4();
   Card* newSkipCard(std::string color);
   Card* newColoredDrawCard(std::string color);
+  Card* newReverseCard(std::string color);
   void shuffle();
 };
 

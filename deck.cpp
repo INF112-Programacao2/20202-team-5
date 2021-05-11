@@ -6,6 +6,7 @@
 #include "plus4.h"
 #include "skipCard.h"
 #include "coloredDrawCard.h"
+#include "reverseCard.h"
 
 Deck::Deck(){
   this->fillDeck();
@@ -16,7 +17,7 @@ std::vector<Card*> Deck::get_cards() {
   return this->_cards;
 }
 
- void Deck::fillDeck() {
+void Deck::fillDeck() {
   std::string c_list[4] = {"blue", "red", "green", "yellow"};
   for (int i=0; i<4; i++) {
    this->_cards.push_back(newWildCard());
@@ -25,6 +26,7 @@ std::vector<Card*> Deck::get_cards() {
    for (int j=0; j<4; j++) {
      this->_cards.push_back(newSkipCard(c_list[i]));
      this->_cards.push_back(newColoredDrawCard(c_list[i]));
+     this->_cards.push_back(newReverseCard(c_list[i]));
    }
 
     for (int j=0; j<10; j++) {
@@ -68,6 +70,11 @@ Card* Deck::newSkipCard(std::string color) {
 
 Card* Deck::newColoredDrawCard(std::string color) {
   Card* c = new ColoredDrawCard(color);
+  return c;
+}
+
+Card* Deck::newReverseCard(std::string color) {
+  Card* c = new ReverseCard(color);
   return c;
 }
 

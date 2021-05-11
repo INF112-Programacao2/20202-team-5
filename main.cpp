@@ -151,10 +151,6 @@ int main() {
 
     al_start_timer(timer);
 
-    std::cout << game.get_players() << ' ' << game.get_activePlayer() << std::endl;
-    std::cout << game.get_playerList().size() << std::endl;
-    std::cout << game.get_board()->get_number() << " / " << game.get_board()->get_color() << std::endl;
-
     std::string command = "start";
 
     while(1)
