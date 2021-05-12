@@ -49,6 +49,10 @@ Card* Deck::newNumberedCard(std::string color, int number) {
 Card* Deck::drawCards(){
   Card* copy = this->get_topCard()->copy();
   this->_cards.erase(this->_cards.end() - 1);
+  if(this->_cards.size() == 0) {
+    fillDeck();
+    shuffle();
+  }
   return copy;
 }
 
