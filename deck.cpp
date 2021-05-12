@@ -39,8 +39,6 @@ Card* Deck::get_topCard() {
   return this->_cards.back();
 }
 
-//get_topCards(int ammount);
-
 Card* Deck::newNumberedCard(std::string color, int number) {
   Card* c = new NumberedCard(color, number);
   return c;

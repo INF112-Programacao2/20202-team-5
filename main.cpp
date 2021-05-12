@@ -11,6 +11,7 @@
 #include "card.h"
 
 ALLEGRO_BITMAP* cardBack;
+ALLEGRO_BITMAP* backGround;
 
 void loadSprites() {
   //for (int i = 0; i < game.get_board()->get_deck()->get_cards().size(); i++) {
@@ -49,6 +50,14 @@ void drawFour(bool show) {
   double playerScale = 0.5;
   int cardWidth = 130;
   int cardHeight = 182;
+
+  al_draw_scaled_bitmap(backGround,
+    0, 0,                                // source origin
+    cardWidth, cardHeight,
+    0, 0,                                // target origin
+    1200, 900 ,                                // target dimensions
+    0                                    // flags
+  );
 
   if (show) {
     Player* drawPlayer = game.get_playerList().at((game.get_activePlayer()+1)%playerNumber);
@@ -140,6 +149,7 @@ int main() {
     ALLEGRO_DISPLAY* disp = al_create_display(1200, 900);
     ALLEGRO_FONT* font = al_create_builtin_font();
     cardBack = al_load_bitmap("sprites/cardback.bmp");
+    backGround = al_load_bitmap("sprites/backGround.bmp");
 
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_mouse_event_source());
