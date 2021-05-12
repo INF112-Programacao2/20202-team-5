@@ -3,6 +3,7 @@
 WildCard::WildCard(){
 	this->_name = "wildcard";
 	this->_spriteName = "sprites/wildcard.bmp";
+	this->_color = "black";
 }
 
 WildCard* WildCard::copy() {
@@ -15,7 +16,7 @@ int WildCard::get_number() {
 }
 
 std::string WildCard::get_color() {
-	return "black";
+	return this->_color;
 }
 
 void WildCard::onPlay(Game game) {

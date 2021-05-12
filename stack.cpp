@@ -18,7 +18,14 @@ void Stack::set_topCard(Card* card){
 }
 
 std::string Stack::get_color() {
+  if (this->get_topCard()->get_color().compare("black") == 0 ) {
+    return this->_color;
+  }
   return this->_cards.back()->get_color();
+}
+
+void Stack::set_color(std::string color) {
+  this->_color = color;
 }
 
 int Stack::get_number() {

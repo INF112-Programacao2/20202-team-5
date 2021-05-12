@@ -6,6 +6,7 @@ Plus4::Plus4(){
 	_cards_to_draw=4;
 	this->_name = "plus4";
 	this->_spriteName = "sprites/plus4.bmp";
+	this->_color = "black";
 }
 
 void Plus4::forceDraw(Game game){
@@ -22,7 +23,7 @@ int Plus4::get_number() {
 }
 
 std::string Plus4::get_color() {
-	return "black";
+	return this->_color;
 }
 
 void Plus4::onPlay(Game game) {
