@@ -5,8 +5,6 @@
 #include "coloredCard.h"
 
 class NumberedCard : public ColoredCard{
-private:
-  int _number;
 public:
   NumberedCard(std::string color, int number);
   int get_number();

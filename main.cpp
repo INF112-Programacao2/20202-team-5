@@ -211,9 +211,11 @@ int main() {
           redraw = true;
         } else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
             if (ClickedCard() != -1) {
-              game.get_playerList().at(game.get_activePlayer())->get_hand()->play(ClickedCard(), game);
-              game.next_player();
-              loadSprites();
+              if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(ClickedCard())->isPlayable()) {
+                game.get_playerList().at(game.get_activePlayer())->get_hand()->play(ClickedCard(), game);
+                game.next_player();
+                loadSprites();
+              }
               redraw = true;
             }
         }

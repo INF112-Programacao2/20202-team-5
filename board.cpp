@@ -2,15 +2,13 @@
 #include "board.h"
 
 Board::Board() {
-  this->_number = 0;
-  this->_color = "blue";
   this->_orientation = 1;
   this->_deck = newDeck();
   this->_stack = newStack();
 }
 
 int Board::get_number() {
-  return this->_number;
+  return this->_stack->get_number();
 }
 
 void Board::set_number(int number) {
@@ -18,7 +16,7 @@ void Board::set_number(int number) {
 }
 
 std::string Board::get_color() {
-  return this->_color;
+  return this->_stack->get_color();
 }
 
 void Board::set_color(std::string color) {

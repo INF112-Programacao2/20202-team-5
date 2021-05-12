@@ -13,11 +13,13 @@ protected:
   std::string _name;
   ALLEGRO_BITMAP* _sprite;
   std::string _spriteName;
+  std::string _color;
+  int _number;
 public:
-  virtual std::string get_color()=0;
-  virtual int get_number()=0;
+  virtual std::string get_color();
+  virtual int get_number();
   std::string get_name();
-  virtual bool isPlayable();
+  bool isPlayable();
   virtual Card* copy()=0;
   ALLEGRO_BITMAP* get_sprite();
   std::string get_spriteName();

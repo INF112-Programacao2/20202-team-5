@@ -6,7 +6,13 @@ std::string Card::get_name() {
 }
 
 bool Card::isPlayable() {
-  return true;
+  if (this->_color == "black" || this->_color.compare(game.get_board()->get_color()) == 0 || this->_number == game.get_board()->get_number()) {
+    return true;
+  }
+  if(this->_name.compare(game.get_board()->get_stack()->get_topCard()->get_name()) == 0 && this->_name.compare("numberedCard") != 0) {
+    return true;
+  }
+  return false;
 }
 
 ALLEGRO_BITMAP* Card::get_sprite() {
@@ -19,4 +25,12 @@ std::string Card::get_spriteName() {
 
 void Card::set_sprite(ALLEGRO_BITMAP* sprite) {
   this->_sprite = sprite;
+}
+
+std::string Card::get_color() {
+  return "black";
+}
+
+int Card::get_number() {
+  return -1;
 }
