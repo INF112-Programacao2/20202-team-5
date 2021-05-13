@@ -135,13 +135,21 @@ void drawFour(bool show) {
 
   activePlayerSize = game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().size();
   for (int i = 0; i < activePlayerSize; i++)  {
-    if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(i)->get_sprite() != NULL) {
+    try {
       al_draw_scaled_bitmap(game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(i)->get_sprite(),
         0, 0,                                // source origin
         cardWidth, cardHeight,
         (al_get_display_width(al_get_current_display())/2) - (50 * activePlayerSize) + (100 * i), al_get_display_height(al_get_current_display()) - 182,                                // target origin
         130, 182 ,                                // target dimensions
         0                                    // flags
+      );
+    } catch (std::exception &e) {
+      al_draw_scaled_bitmap(cardBack,
+        0, 0,                                // source origin
+        cardWidth, cardHeight,
+        (al_get_display_width(al_get_current_display())/2) - (50 * activePlayerSize) + (100 * i), al_get_display_height(al_get_current_display()) - 182,                                // target origin
+        130, 182 ,                                // target dimensions
+        0
       );
     }
   }

@@ -34,7 +34,7 @@ bool Hand::hasPlay(Game game){
 void Hand::noPlay() {//Game game) {
   std::cout << "no play\n";
   this->draw(1, game);
-  if (this->_cards.back()->get_color() == game.get_board()->get_stack()->get_color() || this->_cards.back()->get_number() == game.get_board()->get_stack()->get_number()) {
+  if (this->_cards.back()->isPlayable()) {
     this->play(this->_cards.size() - 1);
   }
   game.next_player();
