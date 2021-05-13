@@ -17,6 +17,9 @@ std::vector<Card*> Deck::get_cards() {
   return this->_cards;
 }
 
+/*
+  Método responsável por preencher o deck com todas as suas cartas
+*/
 void Deck::fillDeck() {
   std::string c_list[4] = {"blue", "red", "green", "yellow"};
   for (int i=0; i<4; i++) {
@@ -43,7 +46,10 @@ Card* Deck::newNumberedCard(std::string color, int number) {
   Card* c = new NumberedCard(color, number);
   return c;
 }
-
+/*
+  Responsável por gerenciar a compra de cartas, retornando uma copia da carta que será comprada e excluindo a mesma do deck.
+  Caso o deck esteja vazio também o preenche denovo.
+*/
 Card* Deck::drawCards(){
   Card* copy = this->get_topCard()->copy();
   this->_cards.erase(this->_cards.end() - 1);
@@ -54,7 +60,7 @@ Card* Deck::drawCards(){
   return copy;
 }
 
- Card* Deck::newWildCard() {
+Card* Deck::newWildCard() {
   Card* c = new WildCard();
   return c;
 }
@@ -86,6 +92,9 @@ int myrandom (int i) {
   return rd()%i;
 }
 
+/*
+  Metodo que embaralha o deck
+*/
 void Deck::shuffle() {
   std::random_shuffle (this->_cards.begin(), this->_cards.end(), myrandom);
 }
