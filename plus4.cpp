@@ -26,7 +26,7 @@ std::string Plus4::get_color() {
 	return this->_color;
 }
 
-void Plus4::onPlay(Game game) {
+void Plus4::onPlay() {
 	this->forceDraw(game);
 	this->pickColor();
 }

@@ -13,9 +13,9 @@ void Hand::draw(int ammount, Game game){
   }
 }
 
-void Hand::play(int card, Game game){
+void Hand::play(int card){
   game.get_board()->get_stack()->set_topCard(this->_cards.at(card)->copy());
-  this->_cards.at(card)->onPlay(game);
+  this->_cards.at(card)->onPlay();
   this->_cards.erase(this->_cards.begin() + card);
   //game.next_player();
 }
@@ -35,7 +35,7 @@ void Hand::noPlay() {//Game game) {
   std::cout << "no play\n";
   this->draw(1, game);
   if (this->_cards.back()->get_color() == game.get_board()->get_stack()->get_color() || this->_cards.back()->get_number() == game.get_board()->get_stack()->get_number()) {
-    this->play(this->_cards.size() - 1, game);
+    this->play(this->_cards.size() - 1);
   }
   game.next_player();
 }

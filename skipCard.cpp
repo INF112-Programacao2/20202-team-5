@@ -25,6 +25,7 @@ std::string SkipCard::get_color() {
 	return this->_color;
 }
 
-void SkipCard::onPlay(Game game) {
+void SkipCard::onPlay() {
 	this->skip(game);
+	game.next_player();
 }

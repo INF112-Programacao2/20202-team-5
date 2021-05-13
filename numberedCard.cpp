@@ -21,4 +21,6 @@ NumberedCard* NumberedCard::copy() {
 	return c;
 }
 
-void NumberedCard::onPlay(Game game) {}
+void NumberedCard::onPlay() {
+  game.next_player();
+}

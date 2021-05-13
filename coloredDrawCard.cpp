@@ -22,6 +22,7 @@ int ColoredDrawCard::get_number() {
 	return -1;
 }
 
-void ColoredDrawCard::onPlay(Game game) {
+void ColoredDrawCard::onPlay() {
 	this->forceDraw(game);
+	game.next_player();
 }

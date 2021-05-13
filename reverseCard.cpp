@@ -24,6 +24,7 @@ std::string ReverseCard::get_color() {
 	return this->_color;
 }
 
-void ReverseCard::onPlay(Game game) {
+void ReverseCard::onPlay() {
 	this->reverse_orientation(game);
+	game.next_player();
 }

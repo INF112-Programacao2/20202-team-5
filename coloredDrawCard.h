@@ -15,7 +15,7 @@ public:
   void forceDraw(Game game);
   int get_number() override;
   ColoredDrawCard* copy() override;
-  void onPlay(Game game) override;
+  void onPlay() override;
 };
 
 #endif

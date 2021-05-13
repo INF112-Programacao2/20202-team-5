@@ -24,7 +24,7 @@ public:
   ALLEGRO_BITMAP* get_sprite();
   std::string get_spriteName();
   void set_sprite(ALLEGRO_BITMAP* sprite);
-  virtual void onPlay(Game game)=0;
+  virtual void onPlay()=0;
 };
 
 #endif

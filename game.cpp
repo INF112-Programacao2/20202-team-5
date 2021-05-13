@@ -106,6 +106,7 @@ bool Game::isPickingColor() {
 void Game::pickedColor(std::string color) {
   this->_isPickingColor = false;
   this->get_board()->get_stack()->set_color(color);
+  this->next_player();
 }
 
 Game game;

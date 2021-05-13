@@ -10,7 +10,7 @@ public:
   int get_number();
   void set_number(int number);
   NumberedCard* copy() override;
-  void onPlay(Game game);
+  void onPlay() override;
 };
 
 #endif

@@ -11,7 +11,7 @@ public:
 	void reverse_orientation(Game game);
 	int get_number() override;
 	std::string get_color() override;
-  void onPlay(Game game);
+  void onPlay() override;
 };
 
 #endif

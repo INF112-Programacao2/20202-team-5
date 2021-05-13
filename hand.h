@@ -12,7 +12,7 @@ private:
 public:
   Hand(Game game);
   void draw(int ammount, Game game);
-  void play(int card, Game game);
+  void play(int card);
   bool hasPlay(Game game);
   void noPlay();//Game game);
   std::vector<Card*> get_cards();

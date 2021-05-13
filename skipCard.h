@@ -11,7 +11,7 @@ public:
   SkipCard* copy() override;
   int get_number() override;
   std::string get_color() override;
-  void onPlay(Game game) override;
+  void onPlay() override;
 };
 
 #endif
