@@ -16,6 +16,7 @@ private:
   std::vector<Player*> _playerList;
   int _activePlayer;
   Board* _board;
+  bool _isPickingColor;
 public:
   Game();//int players);
   int get_players();
@@ -29,6 +30,9 @@ public:
   Board* newBoard();
   Board* get_board();
   void start(int players);
+  void pickColorMenu();
+  bool isPickingColor();
+  void pickedColor(std::string color);
   //int* scores();
 };
 

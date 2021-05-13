@@ -12,6 +12,7 @@
 
 ALLEGRO_BITMAP* cardBack;
 ALLEGRO_BITMAP* backGround;
+ALLEGRO_BITMAP* colorSelect;
 
 void loadSprites() {
   //for (int i = 0; i < game.get_board()->get_deck()->get_cards().size(); i++) {
@@ -150,7 +151,9 @@ int main() {
     ALLEGRO_FONT* font = al_create_builtin_font();
     cardBack = al_load_bitmap("sprites/cardback.bmp");
     backGround = al_load_bitmap("sprites/backGround.bmp");
-
+    colorSelect = al_load_bitmap("sprites/colorSelect.bmp");
+    int displayWidth =  al_get_display_width(al_get_current_display());
+    int displayHeight =  al_get_display_height(al_get_current_display());
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_register_event_source(queue, al_get_mouse_event_source());
     al_register_event_source(queue, al_get_display_event_source(disp));
@@ -220,14 +223,37 @@ int main() {
           }
           redraw = true;
         } else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-            if (ClickedCard() != -1) {
+            if (game.isPickingColor()) {
+              ALLEGRO_MOUSE_STATE state;
+              al_get_mouse_state(&state);
+              if (state.x > displayWidth/2 && state.x < displayWidth/2 + 200) {
+                if (state.y > displayHeight/2 && state.y < displayHeight/2 + 200) {
+                  game.pickedColor("red");
+                  std::cout << "red" << std::endl;
+                }
+                if(state.y < displayHeight/2 && state.y > displayHeight/2 - 200) {
+                  game.pickedColor("yellow");
+                  std::cout << "yellow" << std::endl;
+                }
+              }
+              if (state.x < displayWidth/2 && state.x > displayWidth/2 - 200) {
+                if (state.y > displayHeight/2 && state.y < displayHeight/2 + 200) {
+                  game.pickedColor("blue");
+                  std::cout << "blue" << std::endl;
+                }
+                if(state.y < displayHeight/2 && state.y > displayHeight/2 - 200) {
+                  game.pickedColor("green");
+                  std::cout << "green" << std::endl;
+                }
+              }
+            } else if (ClickedCard() != -1) {
               if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(ClickedCard())->isPlayable()) {
                 game.get_playerList().at(game.get_activePlayer())->get_hand()->play(ClickedCard(), game);
                 game.next_player();
                 loadSprites();
               }
-              redraw = true;
             }
+          redraw = true;
         }
 
         if(redraw && al_is_event_queue_empty(queue))
@@ -251,6 +277,16 @@ int main() {
               130, 182 ,                                // target dimensions
               0                                    // flags
             );
+
+            if (game.isPickingColor()) {
+              al_draw_scaled_bitmap(colorSelect,
+                0, 0,                                // source origin
+                800, 800,
+                displayWidth/2 - 200, displayHeight/2 - 200,                           // target origin
+                400, 400 ,                                // target dimensions
+                0
+              );
+            }
 
             al_flip_display();
 

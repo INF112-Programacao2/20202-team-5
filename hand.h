@@ -14,7 +14,7 @@ public:
   void draw(int ammount, Game game);
   void play(int card, Game game);
   bool hasPlay(Game game);
-  void noPlay(Game game);
+  void noPlay();//Game game);
   std::vector<Card*> get_cards();
 };
 

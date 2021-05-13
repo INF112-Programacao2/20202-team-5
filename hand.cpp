@@ -22,15 +22,17 @@ void Hand::play(int card, Game game){
 
 bool Hand::hasPlay(Game game){
     for(int i = 0; i < this->_cards.size(); i++){
-        if((this->_cards.at(i)->get_color() == game.get_board()->get_stack()->get_color()) || (this->_cards.at(i)->get_number() == game.get_board()->get_stack()->get_number())) {
+        if(this->_cards.at(i)->isPlayable()) {
+          std::cout << "has play\n";
           return true;
         }
     }
-    //this->noPlay(game);
+    this->noPlay();//game);
     return false;
 }
 
-void Hand::noPlay(Game game) {
+void Hand::noPlay() {//Game game) {
+  std::cout << "no play\n";
   this->draw(1, game);
   if (this->_cards.back()->get_color() == game.get_board()->get_stack()->get_color() || this->_cards.back()->get_number() == game.get_board()->get_stack()->get_number()) {
     this->play(this->_cards.size() - 1, game);

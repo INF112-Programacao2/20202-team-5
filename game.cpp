@@ -4,6 +4,7 @@
 #include<iostream>
 
 Game::Game() {
+  this->_isPickingColor = false;
   this->start(4);
 }
 
@@ -37,7 +38,7 @@ void Game::next_player() {
     this->_activePlayer = this->_players - 1;
   }
   std::cout << this->_players << " " << this->_activePlayer << std::endl;
-  //this->_playerList.at(this->_activePlayer)->get_hand()->hasPlay(game);
+  this->_playerList.at(this->_activePlayer)->get_hand()->hasPlay(game);
 }
 
 int Game::get_next_player() {
@@ -94,5 +95,17 @@ void Game::start(int players) {
   this->_playerList.at(this->_activePlayer)->get_hand()->hasPlay(game);
 }
 
+void Game::pickColorMenu() {
+  this->_isPickingColor = true;
+}
+
+bool Game::isPickingColor() {
+  return this->_isPickingColor;
+}
+
+void Game::pickedColor(std::string color) {
+  this->_isPickingColor = false;
+  this->get_board()->get_stack()->set_color(color);
+}
+
 Game game;
-//int* Game::scores() {}

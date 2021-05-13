@@ -20,5 +20,5 @@ std::string WildCard::get_color() {
 }
 
 void WildCard::onPlay(Game game) {
-	pickColor(game);
+	pickColor();
 }

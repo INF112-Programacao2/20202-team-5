@@ -28,5 +28,5 @@ std::string Plus4::get_color() {
 
 void Plus4::onPlay(Game game) {
 	this->forceDraw(game);
-	this->pickColor(game);
+	this->pickColor();
 }

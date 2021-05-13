@@ -8,7 +8,7 @@
 
 class BlackCard : public Card {
 protected:
-	void pickColor(Game game);
+	void pickColor();
 };
 
 #endif
