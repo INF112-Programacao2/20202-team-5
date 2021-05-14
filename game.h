@@ -4,8 +4,11 @@
 #include<vector>
 #include "board.h"
 #include "player.h"
-//class Player;
-//class Board;
+#include "invalidNumberPlayer.h"
+#include "stdexcept"
+
+class Player;
+class Board;
 
 class Board;
 class Player;

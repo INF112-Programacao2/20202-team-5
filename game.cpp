@@ -12,13 +12,17 @@ int Game::get_players() {
 }
 
 void Game::set_players(int players) {
-  if (players > 4) {
-	std::cout<<"It can only have a maximum of 4 players!. "<<std::endl;
-  } else if (players < 2) {
-	std::cout<<"There must be at least 2 players !. "<<std::endl;
-  } else {
-    this->_players = players;
-  }
+  try {
+  	if (players > 4) {
+			throw Excesso_player();
+	}else if (players < 2) {
+			throw Excesso_player();
+  	}else {
+   		this->_players = players;
+  	}
+  }catch (Excesso_player &e){
+  	std::cerr<<e.what()<<std::endl;
+  }	
 }
 
 int Game::get_activePlayer() {
@@ -63,13 +67,17 @@ Board* Game::newBoard() {
 }
 
 void Game::start(int players) {
-  if (players > 4) {
-    std::cout << "Player number over limit\n";
-  } else if (players < 2) {
-    std::cout << "Player number under limit\n";
-  } else {
-    this->_players = players;
-  }
+  try {
+  	if (players > 4) {
+			throw Excesso_player();
+	}else if (players < 2) {
+			throw Excesso_player();
+  	}else {
+   		this->_players = players;
+  	}
+  }catch (Excesso_player &e){
+  	std::cerr<<e.what()<<std::endl;
+  }	
 
   for(int i = 0; i<this->_players;i++) {
     this->_playerList.push_back(this->newPlayer());

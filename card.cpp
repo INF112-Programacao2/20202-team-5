@@ -5,7 +5,8 @@ std::string Card::get_name() {
   return this->_name;
 }
 
-bool Card::isPlayable() {
+bool Card::isPlayable(Player player) {
+ // if(Player->get_hand().get_cards().
   return true;
 }
 
