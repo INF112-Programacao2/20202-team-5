@@ -9,8 +9,8 @@ Plus4::Plus4(){
 	this->_color = "black";
 }
 
-void Plus4::forceDraw(Game game){
-	game.get_playerList().at(game.get_next_player())->get_hand()->draw(this->_cards_to_draw, game);
+void Plus4::forceDraw(){
+	game.get_playerList().at(game.get_next_player())->get_hand()->draw(this->_cards_to_draw);
 }
 
 Plus4* Plus4::copy() {
@@ -27,6 +27,6 @@ std::string Plus4::get_color() {
 }
 
 void Plus4::onPlay() {
-	this->forceDraw(game);
+	this->forceDraw();
 	this->pickColor();
 }

@@ -12,7 +12,7 @@ private:
   int _drawAmmount;
 public:
   ColoredDrawCard(std::string color);
-  void forceDraw(Game game);
+  void forceDraw();
   int get_number() override;
   ColoredDrawCard* copy() override;
   void onPlay() override;

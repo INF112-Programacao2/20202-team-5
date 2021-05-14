@@ -87,7 +87,7 @@ void Game::start(int players) {
   this->_activePlayer=0;
 
   for (int i = 0; i < this->get_players(); i++) {
-    this->get_playerList().at(i)->get_hand()->draw(7, game);
+    this->get_playerList().at(i)->get_hand()->draw(7);
   }
 
   this->_board->get_stack()->begin(game);
@@ -107,6 +107,51 @@ void Game::pickedColor(std::string color) {
   this->_isPickingColor = false;
   this->get_board()->get_stack()->set_color(color);
   this->next_player();
+}
+
+void Game::drawButton() {
+  this->_isDrawMode = true;
+}
+
+void Game::drawButtonPressed() {
+  this->_playerList.at(this->get_activePlayer())->get_hand()->draw(1);
+  if (this->_playerList.at(this->_activePlayer)->get_hand()->get_cards().back()->isPlayable()) {
+    playButton();
+  } else {
+    passButton();
+  }
+  this->_isDrawMode = false;
+}
+
+void Game::passButton() {
+  this->_isPassMode = true;
+}
+
+void Game::playButton() {
+  this->_isPlayMode = true;
+}
+
+void Game::passButtonPressed() {
+  this->_isPassMode = false;
+  this->next_player();
+}
+
+void Game::playButtonPressed() {
+  this->_isPlayMode = false;
+  this->_playerList.at(this->_activePlayer)->get_hand()->play(this->_playerList.at(this->_activePlayer)->get_hand()->get_cards().size() - 1);
+  this->next_player();
+}
+
+bool Game::isDrawMode() {
+  return this->_isDrawMode;
+}
+
+bool Game::isPassMode() {
+  return this->_isPassMode;
+}
+
+bool Game::isPlayMode() {
+  return this->_isPlayMode;
 }
 
 Game game;

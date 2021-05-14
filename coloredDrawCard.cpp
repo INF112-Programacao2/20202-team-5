@@ -9,8 +9,8 @@ ColoredDrawCard::ColoredDrawCard(std::string color){
 	this->_spriteName = "sprites/" + color + "+2.bmp";
 }
 
-void ColoredDrawCard::forceDraw(Game game){
-	game.get_playerList().at(game.get_next_player())->get_hand()->draw(this->_drawAmmount, game);
+void ColoredDrawCard::forceDraw(){
+	game.get_playerList().at(game.get_next_player())->get_hand()->draw(this->_drawAmmount);
 }
 
 ColoredDrawCard* ColoredDrawCard::copy() {
@@ -23,6 +23,6 @@ int ColoredDrawCard::get_number() {
 }
 
 void ColoredDrawCard::onPlay() {
-	this->forceDraw(game);
+	this->forceDraw();
 	game.next_player();
 }

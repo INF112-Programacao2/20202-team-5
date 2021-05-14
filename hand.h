@@ -11,7 +11,7 @@ private:
   std::vector<Card*> _cards;
 public:
   Hand(Game game);
-  void draw(int ammount, Game game);
+  void draw(int ammount);
   void play(int card);
   bool hasPlay(Game game);
   void noPlay();//Game game);

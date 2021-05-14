@@ -9,7 +9,7 @@ private:
 	int _cards_to_draw;
 public:
   Plus4();
-  void forceDraw(Game game);
+  void forceDraw();
 	Plus4* copy() override;
 	int get_number() override;
 	std::string get_color() override;
