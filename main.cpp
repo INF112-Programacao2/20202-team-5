@@ -13,6 +13,11 @@
 ALLEGRO_BITMAP* cardBack;
 ALLEGRO_BITMAP* backGround;
 ALLEGRO_BITMAP* colorSelect;
+ALLEGRO_BITMAP* colorSelectB;
+ALLEGRO_BITMAP* colorSelectY;
+ALLEGRO_BITMAP* colorSelectG;
+ALLEGRO_BITMAP* colorSelectR;
+ALLEGRO_BITMAP* colorSelectCurrent;
 ALLEGRO_BITMAP* mainMenu;
 ALLEGRO_BITMAP* drawButton;
 ALLEGRO_BITMAP* passButton;
@@ -174,6 +179,11 @@ int main() {
     cardBack = al_load_bitmap("sprites/cardback.bmp");
     backGround = al_load_bitmap("sprites/backGround.bmp");
     colorSelect = al_load_bitmap("sprites/colorSelect.bmp");
+    colorSelectB = al_load_bitmap("sprites/colorSelectBlue.bmp");
+    colorSelectY = al_load_bitmap("sprites/colorSelectYellow.bmp");
+    colorSelectG = al_load_bitmap("sprites/colorSelectGreen.bmp");
+    colorSelectR = al_load_bitmap("sprites/colorSelectRed.bmp");
+    colorSelectCurrent = colorSelect;
     mainMenu = al_load_bitmap("sprites/mainMenu.bmp");
     drawButton = al_load_bitmap("sprites/drawButton.bmp");
     passButton = al_load_bitmap("sprites/passButton.bmp");
@@ -194,13 +204,34 @@ int main() {
     std::string command = "start";
     std::string stage = "mainMenu";
 
+    ALLEGRO_MOUSE_STATE state;
+
     while(1)
     {
         al_wait_for_event(queue, &event);
-
-        if(event.type == ALLEGRO_EVENT_TIMER)
-            redraw = true;
-        else if ((event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)) {
+        al_get_mouse_state(&state);
+        if(event.type == ALLEGRO_EVENT_TIMER){
+          if (game.isPickingColor()) {
+            colorSelectCurrent = colorSelect;
+            if (state.x > displayWidth/2 && state.x < displayWidth/2 + 200) {
+              if (state.y > displayHeight/2 && state.y < displayHeight/2 + 200) {
+                colorSelectCurrent = colorSelectR;
+              }
+              if(state.y < displayHeight/2 && state.y > displayHeight/2 - 200) {
+                colorSelectCurrent = colorSelectY;
+              }
+            }
+            if (state.x < displayWidth/2 && state.x > displayWidth/2 - 200) {
+              if (state.y > displayHeight/2 && state.y < displayHeight/2 + 200) {
+                colorSelectCurrent = colorSelectB;
+              }
+              if(state.y < displayHeight/2 && state.y > displayHeight/2 - 200) {
+                colorSelectCurrent = colorSelectG;
+              }
+            }
+          }
+          redraw = true;
+        } else if ((event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)) {
           al_destroy_font(font);
           al_destroy_display(disp);
           al_destroy_timer(timer);
@@ -256,8 +287,6 @@ int main() {
           }
           redraw = true;
         } else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-            ALLEGRO_MOUSE_STATE state;
-            al_get_mouse_state(&state);
             if (stage.compare("mainMenu") == 0) {
               if (state.x > 700 && state.x < displayWidth && state.y > 250 && state.y < 330) {
                 //startGame();
@@ -344,7 +373,7 @@ int main() {
               );
 
               if (game.isPickingColor()) {
-                al_draw_scaled_bitmap(colorSelect,
+                al_draw_scaled_bitmap(colorSelectCurrent,
                   0, 0,                                // source origin
                   800, 800,
                   displayWidth/2 - 200, displayHeight/2 - 200,                           // target origin
