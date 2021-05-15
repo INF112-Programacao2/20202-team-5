@@ -6,6 +6,10 @@ Hand::Hand(Game game){
   this->_cards.clear();
 }
 
+/*
+  Responsável por chamar o metodo drawCards() da classe Deck e entao adicionar a mao do jogador a carta que foi retirada do deck
+*/
+
 void Hand::draw(int ammount){
   for (int i=0; i<ammount; i++){
     this->_cards.push_back(game.get_board()->get_deck()->drawCards());
@@ -13,6 +17,9 @@ void Hand::draw(int ammount){
   }
 }
 
+/*
+  Responsável por jogar as cartas. Adiciona a carta jogada no topo da pilha e retira a mesma da mao do jogador
+*/
 void Hand::play(int card){
   game.get_board()->get_stack()->set_topCard(this->_cards.at(card)->copy());
   this->_cards.at(card)->onPlay();
@@ -20,6 +27,10 @@ void Hand::play(int card){
   //game.next_player();
 }
 
+/*
+  Verifica se o jogador possui jogadas possíveis. Caso nao tenha , chama o metodo noPlay() que faz com que o jogador compre uma carta
+  e caso seja possivel joga-la ele o faz e caso contratrio pula a vez do jogador
+*/
 bool Hand::hasPlay(Game game){
     for(int i = 0; i < this->_cards.size(); i++){
         if(this->_cards.at(i)->isPlayable()) {

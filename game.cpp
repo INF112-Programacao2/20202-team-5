@@ -30,6 +30,14 @@ void Game::set_activePlayer(int activePlayer) {
   this->_activePlayer = activePlayer;
 }
 
+
+/*
+  Da classe Board obtem-se a orientaçao do jogo que é usada para determinar de quem será a proxíma jogada
+  A proxíma jogada é determinada sempre somando a orientaçao(1 ou -1) ao número que corresponde ao jogador da rodada atual
+  exceto quando esta soma se resulta em 0 ou em um número maior que a quantidade de jogadores ,  em seguida é chamada da
+  instância da classe Hand associada ao jogador atual ,  o método hasPlay() que verifica se o jogador possui jogadas possíveis e caso
+  afirmativo este realizará a sua jogada , caso contrario as devidas açoes já so executadas em seguida
+*/ 
 void Game::next_player() {
   this->_activePlayer += this->_board->get_orientation();
   if (this->_activePlayer == this->_players) {
@@ -41,6 +49,10 @@ void Game::next_player() {
   this->_playerList.at(this->_activePlayer)->get_hand()->hasPlay(game);
 }
 
+/*
+  Determina o proxímo jogador a jogar de maneira similar ao metodo next_player() , porém invés de verificar se o jogador possui
+  jogadas possíveis , simplesmente retorna o número correspondente ao jogador seguinte
+*/
 int Game::get_next_player() {
   int r = this->_activePlayer;
   r += this->_board->get_orientation();
@@ -70,6 +82,10 @@ Board* Game::newBoard() {
   return board;
 }
 
+/*
+  Responsável por instanciar e realizar todas as açoes necessárias para iniciar a partida , como instanciar o objeto da classe Board
+  e fazer com que todos os jogadores comprem suas maos iniciais
+*/
 void Game::start(int players) {
   if (players > 4) {
     std::cout << "Player number over limit\n";
@@ -102,7 +118,10 @@ void Game::pickColorMenu() {
 bool Game::isPickingColor() {
   return this->_isPickingColor;
 }
-
+/*
+  Após uma carta preta ser jogada e a cor ser selecionada , este método coloca a cor escolhida como a cor do topo da pilha e em seguida
+  passa a vez para o próximo jogador.
+*/
 void Game::pickedColor(std::string color) {
   this->_isPickingColor = false;
   this->get_board()->get_stack()->set_color(color);

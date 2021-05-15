@@ -5,6 +5,9 @@ std::string Card::get_name() {
   return this->_name;
 }
 
+/*
+  Usa de informaçoes provenientes da classe Game para verificar se a carta pode ser jogar ou nao
+*/
 bool Card::isPlayable() {
   if (this->_color == "black" || this->_color.compare(game.get_board()->get_color()) == 0 || this->_number == game.get_board()->get_number()) {
     return true;
