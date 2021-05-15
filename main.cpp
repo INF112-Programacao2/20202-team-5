@@ -333,6 +333,7 @@ int main() {
             } else if (game.isPlayMode() ) {
               if (state.x > displayWidth - 200 && state.x < displayWidth - 100 && state.y > displayHeight - 200 && state.y < displayHeight - 100) {
                 game.playButtonPressed();
+                loadSprites();
               }
             } else if (ClickedCard() != -1) {
               if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(ClickedCard())->isPlayable()) {

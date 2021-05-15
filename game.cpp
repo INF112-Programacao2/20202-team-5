@@ -37,7 +37,7 @@ void Game::set_activePlayer(int activePlayer) {
   exceto quando esta soma se resulta em 0 ou em um número maior que a quantidade de jogadores ,  em seguida é chamada da
   instância da classe Hand associada ao jogador atual ,  o método hasPlay() que verifica se o jogador possui jogadas possíveis e caso
   afirmativo este realizará a sua jogada , caso contrario as devidas açoes já so executadas em seguida
-*/ 
+*/
 void Game::next_player() {
   this->_activePlayer += this->_board->get_orientation();
   if (this->_activePlayer == this->_players) {
@@ -158,7 +158,6 @@ void Game::passButtonPressed() {
 void Game::playButtonPressed() {
   this->_isPlayMode = false;
   this->_playerList.at(this->_activePlayer)->get_hand()->play(this->_playerList.at(this->_activePlayer)->get_hand()->get_cards().size() - 1);
-  this->next_player();
 }
 
 bool Game::isDrawMode() {
