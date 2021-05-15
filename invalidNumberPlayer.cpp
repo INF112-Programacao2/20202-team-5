@@ -1,5 +1,5 @@
 #include "invalidNumberPlayer.h"
 
-const char* what() const noexcept{
+const char* Excesso_player::what() const noexcept{
     return "Invalid number of players";
-} 
+}
