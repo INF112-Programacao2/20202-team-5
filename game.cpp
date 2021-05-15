@@ -13,12 +13,16 @@ int Game::get_players() {
 }
 
 void Game::set_players(int players) {
-  if (players > 4) {
-
-  } else if (players < 2) {
-
-  } else {
-    this->_players = players;
+  try {
+  	if (players > 4) {
+			throw Excesso_player();
+	}else if (players < 2) {
+			throw Excesso_player();
+  	}else {
+   		this->_players = players;
+  	}
+  }catch (Excesso_player &e){
+  	std::cerr<<e.what()<<std::endl;
   }
 }
 
@@ -87,12 +91,16 @@ Board* Game::newBoard() {
   e fazer com que todos os jogadores comprem suas maos iniciais
 */
 void Game::start(int players) {
-  if (players > 4) {
-    std::cout << "Player number over limit\n";
-  } else if (players < 2) {
-    std::cout << "Player number under limit\n";
-  } else {
-    this->_players = players;
+ try {
+  	if (players > 4) {
+			throw Excesso_player();
+	}else if (players < 2) {
+			throw Excesso_player();
+  	}else {
+   		this->_players = players;
+  	}
+  }catch (Excesso_player &e){
+  	std::cerr<<e.what()<<std::endl;
   }
 
   for(int i = 0; i<this->_players;i++) {

@@ -4,6 +4,8 @@
 #include<vector>
 #include "board.h"
 #include "player.h"
+#include "stdexcept"
+#include "invalidNumberPlayer.h"
 
 class Board;
 class Player;
