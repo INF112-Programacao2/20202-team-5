@@ -9,10 +9,11 @@ Hand::Hand(Game game){
 /*
   Responsável por chamar o metodo drawCards() da classe Deck e entao adicionar a mao do jogador a carta que foi retirada do deck
 */
-void Hand::draw(int ammount, Game game){
+
+void Hand::draw(int ammount){
   for (int i=0; i<ammount; i++){
     this->_cards.push_back(game.get_board()->get_deck()->drawCards());
-    game.get_board()->get_deck()->get_cards().back()->set_sprite(al_load_bitmap(game.get_board()->get_deck()->get_cards().back()->get_spriteName().c_str()));
+    //game.get_board()->get_deck()->get_cards().back()->set_sprite(al_load_bitmap(game.get_board()->get_deck()->get_cards().back()->get_spriteName().c_str()));
   }
 }
 
@@ -43,11 +44,8 @@ bool Hand::hasPlay(Game game){
 
 void Hand::noPlay() {//Game game) {
   std::cout << "no play\n";
-  this->draw(1, game);
-  if (this->_cards.back()->isPlayable()) {
-    this->play(this->_cards.size() - 1);
-  }
-  game.next_player();
+  game.drawButton();
+  //game.next_player();
 }
 
 std::vector<Card*> Hand::get_cards() {

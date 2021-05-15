@@ -12,8 +12,9 @@ Plus4::Plus4(){
 /*
 	Responsável por forçar a compra de cartar por um jogador , quando o anterior jogou uma carta +4
 */
-void Plus4::forceDraw(Game game){
-	game.get_playerList().at(game.get_next_player())->get_hand()->draw(this->_cards_to_draw, game);
+
+void Plus4::forceDraw(){
+	game.get_playerList().at(game.get_next_player())->get_hand()->draw(this->_cards_to_draw);
 }
 
 /*
@@ -37,6 +38,6 @@ std::string Plus4::get_color() {
   escolhe uma cor que será a que continuara na pilha
 */
 void Plus4::onPlay() {
-	this->forceDraw(game);
+	this->forceDraw();
 	this->pickColor();
 }

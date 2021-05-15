@@ -12,9 +12,11 @@ ColoredDrawCard::ColoredDrawCard(std::string color){
 /*
 	Responsável por forçar a compra de cartar por um jogador , quando o anterior jogou uma carta de compra
 */
-void ColoredDrawCard::forceDraw(Game game){
-	game.get_playerList().at(game.get_next_player())->get_hand()->draw(this->_drawAmmount, game);
+
+void ColoredDrawCard::forceDraw(){
+	game.get_playerList().at(game.get_next_player())->get_hand()->draw(this->_drawAmmount);
 }
+
 /*
 	Retorna a copia de um objeto da classe coloredDrawCard
 */
@@ -32,6 +34,6 @@ int ColoredDrawCard::get_number() {
   Dita o comportamento da carta quando ela é jogada, neste caso , força o jogador seguinte a comprar cartas e passa a vez para ele
 */
 void ColoredDrawCard::onPlay() {
-	this->forceDraw(game);
+	this->forceDraw();
 	game.next_player();
 }

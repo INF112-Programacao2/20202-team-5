@@ -4,8 +4,6 @@
 #include<vector>
 #include "board.h"
 #include "player.h"
-//class Player;
-//class Board;
 
 class Board;
 class Player;
@@ -17,8 +15,11 @@ private:
   int _activePlayer;
   Board* _board;
   bool _isPickingColor;
+  bool _isDrawMode;
+  bool _isPassMode;
+  bool _isPlayMode;
 public:
-  Game();//int players);
+  Game();
   int get_players();
   void set_players(int players);
   int get_activePlayer();
@@ -33,6 +34,15 @@ public:
   void pickColorMenu();
   bool isPickingColor();
   void pickedColor(std::string color);
+  void drawButton();
+  void drawButtonPressed();
+  void passButton();
+  void playButton();
+  void passButtonPressed();
+  void playButtonPressed() ;
+  bool isDrawMode();
+  bool isPassMode();
+  bool isPlayMode();
   //int* scores();
 };
 
