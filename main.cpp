@@ -11,6 +11,7 @@
 #include<ctime>
 #include "game.h"
 #include "card.h"
+#include "util.h"
 
 ALLEGRO_BITMAP* cardBack;
 ALLEGRO_BITMAP* backGround;
@@ -47,7 +48,7 @@ void loadSprites() {
 int ClickedCard() {
   ALLEGRO_MOUSE_STATE state;
   al_get_mouse_state(&state);
-  int PlayerSize = game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().size();
+  int PlayerSize = activePlayer()->get_hand()->get_cards().size();
   for (int i = 0; i < PlayerSize; i++) {
     int cardPosX = (al_get_display_width(al_get_current_display())/2) - (50 * PlayerSize) + (100 * i);
     int cardPosY = al_get_display_height(al_get_current_display()) - 182;
@@ -144,10 +145,10 @@ void drawFour(bool show) {
     }
   }
 
-  activePlayerSize = game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().size();
+  activePlayerSize = activePlayer()->get_hand()->get_cards().size();
   for (int i = 0; i < activePlayerSize; i++)  {
     try {
-      al_draw_scaled_bitmap(game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(i)->get_sprite(),
+      al_draw_scaled_bitmap(activePlayer()->get_hand()->get_cards().at(i)->get_sprite(),
         0, 0,                                // source origin
         cardWidth, cardHeight,
         (al_get_display_width(al_get_current_display())/2) - (50 * activePlayerSize) + (100 * i), al_get_display_height(al_get_current_display()) - 182,                                // target origin
@@ -288,8 +289,8 @@ int main() {
               while (1) {
                 std::cout << "insert card: \n";
                 std::cin >> card;
-                if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(card)->isPlayable()) {
-                  game.get_playerList().at(game.get_activePlayer())->get_hand()->play(card);
+                if (activePlayer()->get_hand()->get_cards().at(card)->isPlayable()) {
+                  activePlayer()->get_hand()->play(card);
                   loadSprites();
                   break;
                 }
@@ -347,13 +348,13 @@ int main() {
                 game.playButtonPressed();
                 loadSprites();
               }
-            } else if (game.get_playerList().at(game.get_activePlayer())->get_unoButton()) {
+            } else if (activePlayer()->get_unoButton()) {
               if (state.x > displayWidth - 200 && state.x < displayWidth - 100 && state.y > displayHeight - 200 && state.y < displayHeight - 100) {
-                game.get_playerList().at(game.get_activePlayer())->unoPressed();
+                activePlayer()->unoPressed();
               }
             } else if (ClickedCard() != -1) {
-              if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(ClickedCard())->isPlayable()) {
-                game.get_playerList().at(game.get_activePlayer())->get_hand()->play(ClickedCard());
+              if (activePlayer()->get_hand()->get_cards().at(ClickedCard())->isPlayable()) {
+                activePlayer()->get_hand()->play(ClickedCard());
                 al_play_sample(cardSlide, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 loadSprites();
               }
@@ -426,7 +427,7 @@ int main() {
                   0
                 );
               }
-              if (game.get_playerList().at(game.get_activePlayer())->get_unoButton()) {
+              if (activePlayer()->get_unoButton()) {
                 al_draw_scaled_bitmap(unoButton,
                   0, 0,                                // source origin
                   400, 100,

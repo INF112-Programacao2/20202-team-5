@@ -1,5 +1,6 @@
 #include "hand.h"
 #include "game.h"
+#include "util.h"
 #include <iostream>
 
 Hand::Hand(Game game){
@@ -23,12 +24,12 @@ void Hand::draw(int ammount){
 
 void Hand::play(int card){
   game.get_board()->get_stack()->set_topCard(this->_cards.at(card)->copy());
-  if(this->_cards.size() == 1 && game.get_playerList().at(game.get_activePlayer())->get_uno()) {
+  if(this->_cards.size() == 1 && activePlayer()->get_uno()) {
     this->_cards.erase(this->_cards.begin() + card);
     game.end();
     game.start(4);
-  } else if (this->_cards.size() == 1 && !game.get_playerList().at(game.get_activePlayer())->get_uno()) {
-    game.get_playerList().at(game.get_activePlayer())->get_hand()->draw(2);
+  } else if (this->_cards.size() == 1 && !activePlayer()->get_uno()) {
+    activePlayer()->get_hand()->draw(2);
   } else {
     this->_cards.at(card)->onPlay();
     this->_cards.erase(this->_cards.begin() + card);
@@ -43,7 +44,7 @@ void Hand::play(int card){
 bool Hand::hasPlay() {
   for(int i = 0; i < this->_cards.size(); i++){
     if (this->_cards.at(i)->isPlayable() && this->_cards.size() == 2) {
-      game.get_playerList().at(game.get_activePlayer())->uno();
+      activePlayer()->uno();
       return true;
     }
     if (this->_cards.at(i)->isPlayable()) {

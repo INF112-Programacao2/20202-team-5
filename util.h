@@ -1,3 +1,6 @@
+#ifndef UTIL_H
+#define UTIL_H
+
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_image.h>
@@ -11,3 +14,7 @@
 #include<ctime>
 #include "game.h"
 #include "card.h"
+
+Player* activePlayer();
+
+#endif
