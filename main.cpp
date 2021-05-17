@@ -1,6 +1,8 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <stdbool.h>
 #include<iostream>
 #include<cmath>
@@ -168,6 +170,9 @@ int main() {
     al_install_keyboard();
     al_install_mouse();
     al_init_image_addon();
+    al_install_audio();
+    al_init_acodec_addon();
+    al_reserve_samples(16);
 
     loadSprites();
 
@@ -188,6 +193,9 @@ int main() {
     drawButton = al_load_bitmap("sprites/drawButton.bmp");
     passButton = al_load_bitmap("sprites/passButton.bmp");
     playButton = al_load_bitmap("sprites/playButton.bmp");
+
+    ALLEGRO_SAMPLE* cardSlide = al_load_sample("audio/cardSlide.wav");
+    ALLEGRO_SAMPLE* colorSelectAudio = al_load_sample("audio/colorSelect.wav");
 
     int displayWidth =  al_get_display_width(al_get_current_display());
     int displayHeight =  al_get_display_height(al_get_current_display());
@@ -237,6 +245,7 @@ int main() {
           al_destroy_timer(timer);
           al_destroy_event_queue(queue);
           al_destroy_bitmap(cardBack);
+          al_destroy_sample(cardSlide);
           return 0;
         } else if(event.type == ALLEGRO_EVENT_KEY_DOWN){
            while (1) {
@@ -260,6 +269,7 @@ int main() {
               al_destroy_timer(timer);
               al_destroy_event_queue(queue);
               al_destroy_bitmap(cardBack);
+              al_destroy_sample(cardSlide);
               return 0;
             }
             if (command.compare("-drawcards") == 0) {
@@ -298,27 +308,28 @@ int main() {
                 al_destroy_timer(timer);
                 al_destroy_event_queue(queue);
                 al_destroy_bitmap(cardBack);
+                al_destroy_sample(cardSlide);
                 return 0;
               }
             } else if (game.isPickingColor()) {
               if (state.x > displayWidth/2 && state.x < displayWidth/2 + 200) {
                 if (state.y > displayHeight/2 && state.y < displayHeight/2 + 200) {
                   game.pickedColor("red");
-                  std::cout << "red" << std::endl;
+                  al_play_sample(colorSelectAudio, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 }
                 if(state.y < displayHeight/2 && state.y > displayHeight/2 - 200) {
                   game.pickedColor("yellow");
-                  std::cout << "yellow" << std::endl;
+                  al_play_sample(colorSelectAudio, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 }
               }
               if (state.x < displayWidth/2 && state.x > displayWidth/2 - 200) {
                 if (state.y > displayHeight/2 && state.y < displayHeight/2 + 200) {
                   game.pickedColor("blue");
-                  std::cout << "blue" << std::endl;
+                  al_play_sample(colorSelectAudio, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 }
                 if(state.y < displayHeight/2 && state.y > displayHeight/2 - 200) {
                   game.pickedColor("green");
-                  std::cout << "green" << std::endl;
+                  al_play_sample(colorSelectAudio, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 }
               }
             } else if (game.isDrawMode() ) {
@@ -338,6 +349,7 @@ int main() {
             } else if (ClickedCard() != -1) {
               if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(ClickedCard())->isPlayable()) {
                 game.get_playerList().at(game.get_activePlayer())->get_hand()->play(ClickedCard());
+                al_play_sample(cardSlide, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 loadSprites();
               }
             }
