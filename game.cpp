@@ -5,6 +5,7 @@
 
 Game::Game() {
   this->_isPickingColor = false;
+  this->_isMenuMode = true;
   this->start(4);
 }
 
@@ -46,7 +47,7 @@ void Game::next_player() {
     this->_activePlayer = this->_players - 1;
   }
   std::cout << this->_players << " " << this->_activePlayer << std::endl;
-  this->_playerList.at(this->_activePlayer)->get_hand()->hasPlay(game);
+  this->_playerList.at(this->_activePlayer)->get_hand()->hasPlay();
 }
 
 /*
@@ -87,6 +88,8 @@ Board* Game::newBoard() {
   e fazer com que todos os jogadores comprem suas maos iniciais
 */
 void Game::start(int players) {
+  this->_isPickingColor = false;
+  this->_isMenuMode = true;
   if (players > 4) {
     std::cout << "Player number over limit\n";
   } else if (players < 2) {
@@ -108,7 +111,7 @@ void Game::start(int players) {
 
   this->_board->get_stack()->begin(game);
 
-  this->_playerList.at(this->_activePlayer)->get_hand()->hasPlay(game);
+  this->_playerList.at(this->_activePlayer)->get_hand()->hasPlay();
 }
 
 void Game::pickColorMenu() {
@@ -170,6 +173,26 @@ bool Game::isPassMode() {
 
 bool Game::isPlayMode() {
   return this->_isPlayMode;
+}
+
+void Game::end() {
+  this->_isMenuMode = true;
+  this->_playerList.clear();
+  _activePlayer = 0;
+  delete(this->_board);
+  this->_isPickingColor = false;
+  this->_isMenuMode = false;
+  this->_isDrawMode = false;
+  this->_isPassMode = false;
+  this->_isPlayMode = false;
+}
+
+bool Game::isMenuMode() {
+  return this->_isMenuMode;
+}
+
+void Game::set_MenuMode(bool menuMode) {
+  this->_isMenuMode = menuMode;
 }
 
 Game game;

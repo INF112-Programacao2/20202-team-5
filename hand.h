@@ -13,8 +13,8 @@ public:
   Hand(Game game);
   void draw(int ammount);
   void play(int card);
-  bool hasPlay(Game game);
-  void noPlay();//Game game);
+  bool hasPlay();
+  void noPlay();
   std::vector<Card*> get_cards();
 };
 

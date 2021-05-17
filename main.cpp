@@ -24,6 +24,7 @@ ALLEGRO_BITMAP* mainMenu;
 ALLEGRO_BITMAP* drawButton;
 ALLEGRO_BITMAP* passButton;
 ALLEGRO_BITMAP* playButton;
+ALLEGRO_BITMAP* unoButton;
 
 ALLEGRO_TIMER* timer;
 ALLEGRO_EVENT_QUEUE* queue;
@@ -193,6 +194,7 @@ int main() {
     drawButton = al_load_bitmap("sprites/drawButton.bmp");
     passButton = al_load_bitmap("sprites/passButton.bmp");
     playButton = al_load_bitmap("sprites/playButton.bmp");
+    unoButton = al_load_bitmap("sprites/unoButton.bmp");
 
     ALLEGRO_SAMPLE* cardSlide = al_load_sample("audio/cardSlide.wav");
     ALLEGRO_SAMPLE* colorSelectAudio = al_load_sample("audio/colorSelect.wav");
@@ -210,7 +212,6 @@ int main() {
     al_start_timer(timer);
 
     std::string command = "start";
-    std::string stage = "mainMenu";
 
     ALLEGRO_MOUSE_STATE state;
 
@@ -297,10 +298,10 @@ int main() {
           }
           redraw = true;
         } else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-            if (stage.compare("mainMenu") == 0) {
+            if (game.isMenuMode()) {
               if (state.x > 700 && state.x < displayWidth && state.y > 250 && state.y < 330) {
                 //startGame();
-                stage = "game";
+                game.set_MenuMode(false);
               }
               if (state.x > 700 && state.x < displayWidth && state.y > 627 && state.y < 730) {
                 al_destroy_font(font);
@@ -346,6 +347,10 @@ int main() {
                 game.playButtonPressed();
                 loadSprites();
               }
+            } else if (game.get_playerList().at(game.get_activePlayer())->get_unoButton()) {
+              if (state.x > displayWidth - 200 && state.x < displayWidth - 100 && state.y > displayHeight - 200 && state.y < displayHeight - 100) {
+                game.get_playerList().at(game.get_activePlayer())->unoPressed();
+              }
             } else if (ClickedCard() != -1) {
               if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(ClickedCard())->isPlayable()) {
                 game.get_playerList().at(game.get_activePlayer())->get_hand()->play(ClickedCard());
@@ -359,7 +364,7 @@ int main() {
         if(redraw && al_is_event_queue_empty(queue))
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
-            if (stage.compare("mainMenu") == 0) {
+            if (game.isMenuMode()) {
               al_draw_scaled_bitmap(mainMenu,
                 0, 0,                                // source origin
                 1920, 1080,
@@ -421,11 +426,20 @@ int main() {
                   0
                 );
               }
+              if (game.get_playerList().at(game.get_activePlayer())->get_unoButton()) {
+                al_draw_scaled_bitmap(unoButton,
+                  0, 0,                                // source origin
+                  400, 100,
+                  displayWidth - 200, displayHeight - 200,                           // target origin
+                  100, 40,                                // target dimensions
+                  0
+                );
+              }
             }
 
             ALLEGRO_MOUSE_STATE state1;
             al_get_mouse_state(&state1);
-            // std::cout << state1.x << " " << state1.y << std::endl;
+
             al_flip_display();
 
             redraw = false;
