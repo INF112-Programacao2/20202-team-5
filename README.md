@@ -16,11 +16,11 @@
 
 ---
 
-<p align="center"> Simple UNO card game clone with graphical user interface. 
-    <br> 
+<p align="center"> Simple UNO card game clone with graphical user interface.
+    <br>
 </p>
-<p align="center"> Um clone simples do jogo de cartas UNO com  interface gráfica. 
-    <br> 
+<p align="center"> Um clone simples do jogo de cartas UNO com  interface gráfica.
+    <br>
 </p>
 
 ## 📝 Índice
@@ -60,31 +60,43 @@ Allegro 5.0.0 ou superior.
 
 A step by step series of examples that tell you how to get a development env running.
 
-Say what the step will be
+```
+Ubuntu 18.04+ (or derivatives thereof):
+
+First, add the Allegro PPA. This gives you up-to-date versions of Allegro; the base repos only provide 5.2.3 at the time of writing.
+
+sudo add-apt-repository ppa:allegro/5.2
+Then, install Allegro:
+
+sudo apt-get install liballegro*5.2 liballegro*5-dev
+
+
+Fedora:
+sudo dnf install allegro5*
 
 ```
-Give the example
-```
 
-And repeat
+Compilação: make
 
-```
-until finished
-```
+Limpar arquivos output: make clean
 
-End with an example of getting some data out of the system or using it for a little demo..
 
 ## ⛏️ Bibliotecas utilizadas <a name = "built_using"></a>
 
 - [Allegro](https://www.allegro.cc) - Interface gráfica
 
-## 📝 Documentaçao <a name = "documentation"></a> 
+## 📝 Documentaçao <a name = "documentation"></a>
 
+Start: Começa Jogo com 4 jogadores.
+
+Sair: Termina execução.
+
+Regras: Seguem Regras padrão do jogo UNO - https://en.wikipedia.org/wiki/Uno_(card_game)#Official_rules
 
 
 ## ✍️ Autores <a name = "authors"></a>
 
 - [@BoliviaCG](https://github.com/BoliviaCG)
-- [@Guilherme-jose](https://github.com/Guilherme-jose) 
+- [@Guilherme-jose](https://github.com/Guilherme-jose)
 - [@Kevin-Ax](https://github.com/Kevin-Ax)
-- [@PauloDezingrini](https://github.com/PauloDezingrini) 
+- [@PauloDezingrini](https://github.com/PauloDezingrini)
