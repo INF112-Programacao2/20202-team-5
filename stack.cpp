@@ -1,6 +1,7 @@
 #include "stack.h"
 #include "card.h"
 Stack::Stack() {
+  this->_color = "blue";
   this->_cards.clear();
 }
 
