@@ -93,6 +93,9 @@ Sair: Termina execução.
 
 Regras: Seguem Regras padrão do jogo UNO - https://en.wikipedia.org/wiki/Uno_(card_game)#Official_rules
 
+![Alt text](sprites/screen1.png?raw=true "Title")
+
+![Alt text](sprites/screen2.png?raw=true "Title")
 
 ## ✍️ Autores <a name = "authors"></a>
 
