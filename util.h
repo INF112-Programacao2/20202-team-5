@@ -16,5 +16,6 @@
 #include "card.h"
 
 Player* activePlayer();
+void loadSprites();
 
 #endif
