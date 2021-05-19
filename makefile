@@ -1,6 +1,6 @@
 
-output: main.o card.o board.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o hand.o plus4.o reverseCard.o invalidNumberPlayer.o
-	g++ main.o card.o board.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o hand.o plus4.o reverseCard.o invalidNumberPlayer.o -o output -I/usr/include/allegro5 -L/usr/lib -lallegro -lallegro_main -lallegro_font -lallegro_image
+output: main.o card.o board.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o hand.o plus4.o reverseCard.o util.o invalidNumberPlayer.o
+	g++ main.o card.o board.o coloredCard.o deck.o game.o numberedCard.o player.o stack.o blackCard.o coloredDrawCard.o skipCard.o wildCard.o hand.o plus4.o reverseCard.o util.o invalidNumberPlayer.o -o output -I/usr/include/allegro5 -L/usr/lib -lallegro -lallegro_main -lallegro_font -lallegro_image -lallegro_audio -lallegro_acodec
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -49,6 +49,9 @@ plus4.o: plus4.cpp plus4.h
 
 reverseCard.o: reverseCard.cpp reverseCard.h
 	g++ -c reverseCard.cpp
+
+util.o: util.cpp util.h
+	g++ -c util.cpp
 
 invalidNumberPlayer.o: invalidNumberPlayer.cpp invalidNumberPlayer.h
 	g++ -c invalidNumberPlayer.cpp

@@ -1,6 +1,7 @@
 #include "stack.h"
 #include "card.h"
 Stack::Stack() {
+  this->_color = "blue";
   this->_cards.clear();
 }
 
@@ -29,6 +30,9 @@ void Stack::set_color(std::string color) {
 }
 
 int Stack::get_number() {
+  if (this->get_topCard()->get_color().compare("black") == 0 ) {
+    return -2;
+  }
   return this->_cards.back()->get_number();
 }
 

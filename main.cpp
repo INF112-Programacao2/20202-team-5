@@ -1,6 +1,8 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <stdbool.h>
 #include<iostream>
 #include<cmath>
@@ -9,6 +11,7 @@
 #include<ctime>
 #include "game.h"
 #include "card.h"
+#include "util.h"
 
 ALLEGRO_BITMAP* cardBack;
 ALLEGRO_BITMAP* backGround;
@@ -22,29 +25,17 @@ ALLEGRO_BITMAP* mainMenu;
 ALLEGRO_BITMAP* drawButton;
 ALLEGRO_BITMAP* passButton;
 ALLEGRO_BITMAP* playButton;
+ALLEGRO_BITMAP* unoButton;
 
 ALLEGRO_TIMER* timer;
 ALLEGRO_EVENT_QUEUE* queue;
 ALLEGRO_DISPLAY* disp;
 ALLEGRO_FONT* font;
 
-void loadSprites() {
-  //for (int i = 0; i < game.get_board()->get_deck()->get_cards().size(); i++) {
-  //  game.get_board()->get_deck()->get_cards().at(i)->set_sprite(al_load_bitmap(game.get_board()->get_deck()->get_cards().at(i)->get_spriteName().c_str()));
-  //}
-  for (int j = 0; j < game.get_players(); j++) {
-    for(int i = 0; i < game.get_playerList().at(j)->get_hand()->get_cards().size(); i++) {
-      game.get_playerList().at(j)->get_hand()->get_cards().at(i)->set_sprite(al_load_bitmap(game.get_playerList().at(j)->get_hand()->get_cards().at(i)->get_spriteName().c_str()));
-    }
-  }
-
-  game.get_board()->get_stack()->get_cards().back()->set_sprite(al_load_bitmap(game.get_board()->get_stack()->get_cards().back()->get_spriteName().c_str()));
-}
-
 int ClickedCard() {
   ALLEGRO_MOUSE_STATE state;
   al_get_mouse_state(&state);
-  int PlayerSize = game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().size();
+  int PlayerSize = activePlayer()->get_hand()->get_cards().size();
   for (int i = 0; i < PlayerSize; i++) {
     int cardPosX = (al_get_display_width(al_get_current_display())/2) - (50 * PlayerSize) + (100 * i);
     int cardPosY = al_get_display_height(al_get_current_display()) - 182;
@@ -141,10 +132,10 @@ void drawFour(bool show) {
     }
   }
 
-  activePlayerSize = game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().size();
+  activePlayerSize = activePlayer()->get_hand()->get_cards().size();
   for (int i = 0; i < activePlayerSize; i++)  {
     try {
-      al_draw_scaled_bitmap(game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(i)->get_sprite(),
+      al_draw_scaled_bitmap(activePlayer()->get_hand()->get_cards().at(i)->get_sprite(),
         0, 0,                                // source origin
         cardWidth, cardHeight,
         (al_get_display_width(al_get_current_display())/2) - (50 * activePlayerSize) + (100 * i), al_get_display_height(al_get_current_display()) - 182,                                // target origin
@@ -168,6 +159,9 @@ int main() {
     al_install_keyboard();
     al_install_mouse();
     al_init_image_addon();
+    al_install_audio();
+    al_init_acodec_addon();
+    al_reserve_samples(16);
 
     loadSprites();
 
@@ -188,6 +182,10 @@ int main() {
     drawButton = al_load_bitmap("sprites/drawButton.bmp");
     passButton = al_load_bitmap("sprites/passButton.bmp");
     playButton = al_load_bitmap("sprites/playButton.bmp");
+    unoButton = al_load_bitmap("sprites/unoButton.bmp");
+
+    ALLEGRO_SAMPLE* cardSlide = al_load_sample("audio/cardSlide.wav");
+    ALLEGRO_SAMPLE* colorSelectAudio = al_load_sample("audio/colorSelect.wav");
 
     int displayWidth =  al_get_display_width(al_get_current_display());
     int displayHeight =  al_get_display_height(al_get_current_display());
@@ -202,7 +200,6 @@ int main() {
     al_start_timer(timer);
 
     std::string command = "start";
-    std::string stage = "mainMenu";
 
     ALLEGRO_MOUSE_STATE state;
 
@@ -237,6 +234,7 @@ int main() {
           al_destroy_timer(timer);
           al_destroy_event_queue(queue);
           al_destroy_bitmap(cardBack);
+          al_destroy_sample(cardSlide);
           return 0;
         } else if(event.type == ALLEGRO_EVENT_KEY_DOWN){
            while (1) {
@@ -260,6 +258,7 @@ int main() {
               al_destroy_timer(timer);
               al_destroy_event_queue(queue);
               al_destroy_bitmap(cardBack);
+              al_destroy_sample(cardSlide);
               return 0;
             }
             if (command.compare("-drawcards") == 0) {
@@ -277,8 +276,8 @@ int main() {
               while (1) {
                 std::cout << "insert card: \n";
                 std::cin >> card;
-                if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(card)->isPlayable()) {
-                  game.get_playerList().at(game.get_activePlayer())->get_hand()->play(card);
+                if (activePlayer()->get_hand()->get_cards().at(card)->isPlayable()) {
+                  activePlayer()->get_hand()->play(card);
                   loadSprites();
                   break;
                 }
@@ -287,10 +286,10 @@ int main() {
           }
           redraw = true;
         } else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-            if (stage.compare("mainMenu") == 0) {
+            if (game.isMenuMode()) {
               if (state.x > 700 && state.x < displayWidth && state.y > 250 && state.y < 330) {
                 //startGame();
-                stage = "game";
+                game.set_MenuMode(false);
               }
               if (state.x > 700 && state.x < displayWidth && state.y > 627 && state.y < 730) {
                 al_destroy_font(font);
@@ -298,27 +297,28 @@ int main() {
                 al_destroy_timer(timer);
                 al_destroy_event_queue(queue);
                 al_destroy_bitmap(cardBack);
+                al_destroy_sample(cardSlide);
                 return 0;
               }
             } else if (game.isPickingColor()) {
               if (state.x > displayWidth/2 && state.x < displayWidth/2 + 200) {
                 if (state.y > displayHeight/2 && state.y < displayHeight/2 + 200) {
                   game.pickedColor("red");
-                  std::cout << "red" << std::endl;
+                  al_play_sample(colorSelectAudio, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 }
                 if(state.y < displayHeight/2 && state.y > displayHeight/2 - 200) {
                   game.pickedColor("yellow");
-                  std::cout << "yellow" << std::endl;
+                  al_play_sample(colorSelectAudio, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 }
               }
               if (state.x < displayWidth/2 && state.x > displayWidth/2 - 200) {
                 if (state.y > displayHeight/2 && state.y < displayHeight/2 + 200) {
                   game.pickedColor("blue");
-                  std::cout << "blue" << std::endl;
+                  al_play_sample(colorSelectAudio, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 }
                 if(state.y < displayHeight/2 && state.y > displayHeight/2 - 200) {
                   game.pickedColor("green");
-                  std::cout << "green" << std::endl;
+                  al_play_sample(colorSelectAudio, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 }
               }
             } else if (game.isDrawMode() ) {
@@ -335,9 +335,14 @@ int main() {
                 game.playButtonPressed();
                 loadSprites();
               }
+            } else if (activePlayer()->get_unoButton()) {
+              if (state.x > displayWidth - 200 && state.x < displayWidth - 100 && state.y > displayHeight - 200 && state.y < displayHeight - 100) {
+                activePlayer()->unoPressed();
+              }
             } else if (ClickedCard() != -1) {
-              if (game.get_playerList().at(game.get_activePlayer())->get_hand()->get_cards().at(ClickedCard())->isPlayable()) {
-                game.get_playerList().at(game.get_activePlayer())->get_hand()->play(ClickedCard());
+              if (activePlayer()->get_hand()->get_cards().at(ClickedCard())->isPlayable()) {
+                activePlayer()->get_hand()->play(ClickedCard());
+                al_play_sample(cardSlide, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                 loadSprites();
               }
             }
@@ -347,7 +352,7 @@ int main() {
         if(redraw && al_is_event_queue_empty(queue))
         {
             al_clear_to_color(al_map_rgb(0, 0, 0));
-            if (stage.compare("mainMenu") == 0) {
+            if (game.isMenuMode()) {
               al_draw_scaled_bitmap(mainMenu,
                 0, 0,                                // source origin
                 1920, 1080,
@@ -409,11 +414,20 @@ int main() {
                   0
                 );
               }
+              if (activePlayer()->get_unoButton()) {
+                al_draw_scaled_bitmap(unoButton,
+                  0, 0,                                // source origin
+                  400, 100,
+                  displayWidth - 200, displayHeight - 200,                           // target origin
+                  100, 40,                                // target dimensions
+                  0
+                );
+              }
             }
 
             ALLEGRO_MOUSE_STATE state1;
             al_get_mouse_state(&state1);
-            // std::cout << state1.x << " " << state1.y << std::endl;
+
             al_flip_display();
 
             redraw = false;

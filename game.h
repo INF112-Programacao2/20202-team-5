@@ -17,6 +17,7 @@ private:
   int _activePlayer;
   Board* _board;
   bool _isPickingColor;
+  bool _isMenuMode;
   bool _isDrawMode;
   bool _isPassMode;
   bool _isPlayMode;
@@ -45,6 +46,9 @@ public:
   bool isDrawMode();
   bool isPassMode();
   bool isPlayMode();
+  void end();
+  bool isMenuMode();
+  void set_MenuMode(bool menuMode);
   //int* scores();
 };
 
